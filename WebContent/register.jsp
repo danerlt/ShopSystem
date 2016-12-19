@@ -52,7 +52,7 @@ font {
 				<div class="col-md-8"
 					style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;">
 					<font>会员注册</font>USER REGISTER
-					<form method="post" action="register_ok.jsp"
+					<form method="post" action="Register"
 						class="form-horizontal" style="margin-top:5px;">
 
 						<div class="form-group">

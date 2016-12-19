@@ -61,7 +61,7 @@ font {
 						<font>会员登录</font>USER LOGIN
 
 						<div>&nbsp;</div>
-						<form method="post" action="login_ok.jsp" class="form-horizontal">
+						<form method="post" action="Login" class="form-horizontal">
 
 							<div class="form-group">
 								<label for="username" class="col-sm-2 control-label">用户名</label>
