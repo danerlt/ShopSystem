@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.shop.dao.*;
 import com.shop.domain.*;
 public class Register extends HttpServlet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public void doGet(HttpServletRequest request,HttpServletResponse response){
 		String cust_id=request.getParameter("cust_id");
 		String cust_pwd=request.getParameter("cust_pwd");

@@ -30,15 +30,16 @@ public class CustomerDao extends DBUtil{
 				};
 		try {
 			this.pstmt=conn.prepareStatement(sql);
-			int n=this.executeUpdate(sql,params);
+			int n=this.doUpdate(sql, params);
 			if(n>0){
 				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			release(this.pstmt,this.conn);
+			this.close();
 		}
+		
 		return false;
 	}
 	/**
@@ -52,14 +53,14 @@ public class CustomerDao extends DBUtil{
 		String [] params={id};
 		try {
 			this.pstmt=conn.prepareStatement(sql);
-			int n=this.executeUpdate(sql,params);
+			int n=this.doUpdate(sql,params);
 			if(n>0){
 				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			release(this.pstmt,this.conn);
+			this.close();
 		}
 		return false;
 	}
@@ -85,14 +86,14 @@ public class CustomerDao extends DBUtil{
 				};
 		try {
 			this.pstmt=conn.prepareStatement(sql);
-			int n=this.executeUpdate(sql,params);
+			int n=this.doUpdate(sql,params);
 			if(n>0){
 				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			release(this.pstmt,this.conn);
+			this.close();
 		}
 		return false;
 	}
@@ -107,7 +108,7 @@ public class CustomerDao extends DBUtil{
 		String [] params={id};
 		try {
 			this.pstmt=conn.prepareStatement(sql);
-			this.rs=this.executeQuery(sql,params);
+			this.rs=this.doQuery(sql,params);
 			if(rs.next()){
 				Customer c=new Customer();
 				c.setId(rs.getString(1));
@@ -125,7 +126,7 @@ public class CustomerDao extends DBUtil{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			release(this.rs,this.pstmt,this.conn);
+			this.close();
 		}
 		return null;
 	}
@@ -140,7 +141,7 @@ public class CustomerDao extends DBUtil{
 		String [] params=null;
 		try {
 			this.pstmt=conn.prepareStatement(sql);
-			this.rs=this.executeQuery(sql,params);
+			this.rs=this.doQuery(sql,params);
 			while(rs.next()){
 				Customer c=new Customer();
 				c.setId(rs.getString(1));
@@ -159,7 +160,7 @@ public class CustomerDao extends DBUtil{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			release(this.rs,this.pstmt,this.conn);
+			this.close();
 		}
 		return null;
 	}
