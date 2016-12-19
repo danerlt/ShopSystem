@@ -16,5 +16,20 @@
     <filter-name>CharSetFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.shop.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Registe</servlet-name>
+    <servlet-class>com.shop.servlet.RegisteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Registe</servlet-name>
+    <url-pattern>/Registe</url-pattern>
+  </servlet-mapping>
 </web-app>
