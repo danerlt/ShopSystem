@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!--创建logDIV--菜单栏-->
 <div class="container">
 	<!--log-->
@@ -13,9 +14,15 @@
 
 	</div>
 	<div class="col-md-4" style="padding-top: 30px;">
-		<a href="login.jsp">登录</a> <a
-			href="register.jsp ">注册</a> <a
-			href="cart.jsp">购物车</a>
+		<a href="cart.jsp">购物车</a>
+		<c:if test="${not empty sessionScope.customer }">
+		  <a href="#">当前用户:${sessionScope.customer.name}</a>
+		  <a href="${pageContext.request.contextPath}/logout">注销</a>
+		</c:if>
+		<c:if test="${ empty customer }">
+		    <a href="login.jsp">登录</a> 
+			<a href="register.jsp ">注册</a> 
+	    </c:if>
 	</div>
 </div>
 <!--创建menuDIV--导航条-->

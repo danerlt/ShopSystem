@@ -6,7 +6,7 @@
   </welcome-file-list>
   <filter>
     <filter-name>CharSetFilter</filter-name>
-    <filter-class>com.shop.CharSetFilter</filter-class>
+    <filter-class>com.shop.filter.CharSetFilter</filter-class>
     <init-param>
       <param-name>initEncoding</param-name>
       <param-value>UTF-8</param-value>
@@ -25,11 +25,11 @@
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>Registe</servlet-name>
+    <servlet-name>Register</servlet-name>
     <servlet-class>com.shop.servlet.RegisteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Registe</servlet-name>
-    <url-pattern>/Registe</url-pattern>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/Register</url-pattern>
   </servlet-mapping>
 </web-app>

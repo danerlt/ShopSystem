@@ -6,10 +6,11 @@
 
 <head>
 <meta charset="UTF-8">
-<title>在线登录</title>
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<title>在线注册</title>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/my.js"></script>
 <!-- 引入自定义css文件 style.css -->
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 
@@ -44,29 +45,30 @@ font {
 		<%@ include file="head.jsp"%>
 
 		<div class="container"
-			style="width:100%;background:url('image/regist_bg.jpg');">
+			style="width: 100%; background: url('image/regist_bg.jpg');">
 			<div class="row">
 
 				<div class="col-md-2"></div>
 
 				<div class="col-md-8"
-					style="background:#fff;padding:40px 80px;margin:30px;border:7px solid #ccc;">
+					style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
 					<font>会员注册</font>USER REGISTER
-					<form method="post" action="Register"
-						class="form-horizontal" style="margin-top:5px;">
+					<form name="registerform" id="registerform" action="Register"
+						method="post" class="form-horizontal" style="margin-top: 5px;">
 
 						<div class="form-group">
 							<label for="username" class="col-sm-2 control-label">用户名</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" id="username"
-									name="cust_id" placeholder="请输入用户名">
+									name="cust_name" placeholder="请输入用户名"
+									onblur="haveUser(this.value)">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+							<label for="inputPassword" class="col-sm-2 control-label">密码</label>
 							<div class="col-sm-6">
-								<input type="password" class="form-control" id="inputPassword3"
+								<input type="password" class="form-control" id="inputPassword"
 									name="cust_pwd" placeholder="请输入密码">
 							</div>
 						</div>
@@ -80,9 +82,9 @@ font {
 						</div>
 
 						<div class="form-group">
-							<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+							<label for="inputEmail" class="col-sm-2 control-label">Email</label>
 							<div class="col-sm-6">
-								<input type="email" class="form-control" id="inputEmail3"
+								<input type="email" class="form-control" id="inputEmail"
 									name="email" placeholder="Email">
 							</div>
 						</div>
@@ -90,15 +92,13 @@ font {
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<input type="submit" width="100" value="注册" name="submit"
-									border="0"
-									style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-				    height:35px;width:100px;color:white;">
+									
+									style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
 							</div>
 							<div class="col-sm-offset-2 col-sm-10">
 								<input type="reset" width="100" value="重置" name="submit"
-									border="0"
-									style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-				    height:35px;width:100px;color:white;">
+									
+									style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
 							</div>
 						</div>
 					</form>

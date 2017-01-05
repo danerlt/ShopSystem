@@ -1,7 +1,7 @@
 package com.shop.domain;
 
 public class Customer {
-	private String id;
+	private int id;
 	private String pwd;
 	private String name;
 	private String addr;
@@ -11,10 +11,10 @@ public class Customer {
 	private String sex;
 	private int level;
 	private int score;
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getPwd() {
