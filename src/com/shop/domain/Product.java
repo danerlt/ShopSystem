@@ -14,6 +14,12 @@ public class Product {
     private BigDecimal mPrice;
     private String isHot;
     private String isShow;
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", pName=" + pName + ", pDesc=" + pDesc + ", pubTime=" + pubTime + ", pKeepTime="
+				+ pKeepTime + ", pImage=" + pImage + ", kId=" + kId + ", iPrice=" + iPrice + ", mPrice=" + mPrice
+				+ ", isHot=" + isHot + ", isShow=" + isShow + "]";
+	}
 	public int getId() {
 		return id;
 	}

@@ -13,9 +13,8 @@ public class CustomerDao extends DBUtil {
 	 * @return
 	 */
 	public boolean insert(Customer c) {
-		String sql = "insert into customer(cust_pwd,cust_name,addr,email,zip,tel,sex,cust_level,cust_sco) values(?,?,?,?,?,?,?,?,?)";
-		String[] params = { c.getPwd(), c.getName(), c.getAddr(), c.getEmail(), c.getZip(), c.getTel(), c.getSex(),
-				String.valueOf(c.getLevel()), String.valueOf((c.getScore())) };
+		String sql = "insert into customer(username,password,email,tel,sex,level,score) values(?,?,?,?,?,?,?)";
+		Object[] params = { c.getUsername(),c.getPassword(),c.getEmail(),c.getTel(),c.getSex(), c.getLevel(),c.getScore()};
 		try {
 			int n = this.doUpdate(sql, params);
 			if (n > 0) {
@@ -33,14 +32,33 @@ public class CustomerDao extends DBUtil {
 	/**
 	 * 按照ID删除用户
 	 * 
-	 * @param id
+	 * @param id 用户ID
 	 * @return
 	 */
-	public boolean delete(String id) {
-		String sql = "delete customer where cust_id=?";
-		String[] params = { id };
+	public boolean delete(int id) {
+		String sql = "delete customer where id="+id;
 		try {
-			int n = this.doUpdate(sql, params);
+			int n = this.doUpdate(sql);
+			if (n > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return false;
+	}
+	/**
+	 * 按照ID删除用户
+	 * 
+	 * @param name 用户名
+	 * @return
+	 */
+	public boolean delete(String name) {
+		String sql = "delete customer where username="+name;
+		try {
+			int n = this.doUpdate(sql);
 			if (n > 0) {
 				return true;
 			}
@@ -59,9 +77,8 @@ public class CustomerDao extends DBUtil {
 	 * @return
 	 */
 	public boolean update(Customer c) {
-		String sql = "update customer set cust_pwd=?,cust_name=?,addr=?,email=?,zip=?,tel=?,sex=?,cust_level=?,cust_sco=? where cust_id=?";
-		String[] params = { c.getPwd(), c.getName(), c.getAddr(), c.getEmail(), c.getZip(), c.getTel(), c.getSex(),
-				String.valueOf(c.getLevel()), String.valueOf((c.getScore())), String.valueOf(c.getId()) };
+		String sql = "update customer set username=?,password=?,email=?,tel=?,sex=?,level=?,score=? where id=?";
+		Object[] params = { c.getUsername(),c.getPassword(),c.getEmail(),c.getTel(),c.getSex(),c.getLevel(),c.getScore(),c.getId()};
 		try {
 			int n = this.doUpdate(sql, params);
 			if (n > 0) {
@@ -78,25 +95,23 @@ public class CustomerDao extends DBUtil {
 	/**
 	 * 按照Name查找用户
 	 * 
-	 * @param id
+	 * @param id 用户ID 
 	 * @return
 	 */
 	public Customer find(int id) {
-		String sql = "select * from customer where cust_name = "+id;
+		String sql = "select * from customer where id = "+id;
 		try {
 			this.rs = this.doQuery(sql);
 			if (rs.next()) {
 				Customer c = new Customer();
 				c.setId(rs.getInt(1));
-				c.setPwd(rs.getString(2));
-				c.setName(rs.getString(3));
-				c.setAddr(rs.getString(4));
-				c.setEmail(rs.getString(5));
-				c.setZip(rs.getString(6));
-				c.setTel(rs.getString(7));
-				c.setSex(rs.getString(8));
-				c.setLevel(rs.getInt(9));
-				c.setScore(rs.getInt(10));
+				c.setUsername(rs.getString(2));
+				c.setPassword(rs.getString(3));
+				c.setEmail(rs.getString(4));
+				c.setTel(rs.getString(5));
+				c.setSex(rs.getString(6));
+				c.setLevel(rs.getInt(7));
+				c.setScore(rs.getInt(8));
 				return c;
 			}
 		} catch (Exception e) {
@@ -110,26 +125,23 @@ public class CustomerDao extends DBUtil {
 	/**
 	 * 按照Name查找用户
 	 * 
-	 * @param name
+	 * @param name 用户名
 	 * @return
 	 */
 	public Customer find(String name) {
-		String sql = "select * from customer where cust_name = ?";
-		String[] params = {name};
+		String sql = "select * from customer where username ="+name ;
 		try {
-			this.rs = this.doQuery(sql,params);
+			this.rs = this.doQuery(sql);
 			if (rs.next()) {
 				Customer c = new Customer();
 				c.setId(rs.getInt(1));
-				c.setPwd(rs.getString(2));
-				c.setName(rs.getString(3));
-				c.setAddr(rs.getString(4));
-				c.setEmail(rs.getString(5));
-				c.setZip(rs.getString(6));
-				c.setTel(rs.getString(7));
-				c.setSex(rs.getString(8));
-				c.setLevel(rs.getInt(9));
-				c.setScore(rs.getInt(10));
+				c.setUsername(rs.getString(2));
+				c.setPassword(rs.getString(3));
+				c.setEmail(rs.getString(4));
+				c.setTel(rs.getString(5));
+				c.setSex(rs.getString(6));
+				c.setLevel(rs.getInt(7));
+				c.setScore(rs.getInt(8));
 				return c;
 			}
 		} catch (Exception e) {
@@ -147,25 +159,23 @@ public class CustomerDao extends DBUtil {
 	 * @return 找到用户就返回这个用户，找不到返回null
 	 */
 	public Customer find(String name, String password) {
-		String sql = "select * from customer where cust_name =?";
+		String sql = "select password from customer where username =?";
 		String[] params = { name };
 		try {
 			this.rs = this.doQuery(sql, params);
 
 			if (rs.next()) {
-				String pwd = rs.getString(2);// 获取数据库中的cust_pwd
+				String pwd = rs.getString(1);// 获取数据库中的cust_pwd
 				if (pwd.equals(password)) {
 					Customer c = new Customer();
 					c.setId(rs.getInt(1));
-					c.setPwd(rs.getString(2));
-					c.setName(rs.getString(3));
-					c.setAddr(rs.getString(4));
-					c.setEmail(rs.getString(5));
-					c.setZip(rs.getString(6));
-					c.setTel(rs.getString(7));
-					c.setSex(rs.getString(8));
-					c.setLevel(rs.getInt(9));
-					c.setScore(rs.getInt(10));
+					c.setUsername(rs.getString(2));
+					c.setPassword(rs.getString(3));
+					c.setEmail(rs.getString(4));
+					c.setTel(rs.getString(5));
+					c.setSex(rs.getString(6));
+					c.setLevel(rs.getInt(7));
+					c.setScore(rs.getInt(8));
 					return c;
 				}
 			} else {
@@ -194,15 +204,13 @@ public class CustomerDao extends DBUtil {
 			while (rs.next()) {
 				Customer c = new Customer();
 				c.setId(rs.getInt(1));
-				c.setPwd(rs.getString(2));
-				c.setName(rs.getString(3));
-				c.setAddr(rs.getString(4));
-				c.setEmail(rs.getString(5));
-				c.setZip(rs.getString(6));
-				c.setTel(rs.getString(7));
-				c.setSex(rs.getString(8));
-				c.setLevel(rs.getInt(9));
-				c.setScore(rs.getInt(10));
+				c.setUsername(rs.getString(2));
+				c.setPassword(rs.getString(3));
+				c.setEmail(rs.getString(4));
+				c.setTel(rs.getString(5));
+				c.setSex(rs.getString(6));
+				c.setLevel(rs.getInt(7));
+				c.setScore(rs.getInt(8));
 				list.add(c);
 			}
 			return list;
@@ -215,25 +223,6 @@ public class CustomerDao extends DBUtil {
 	}
 
 	public static void main(String[] args) {
-		Customer u = new Customer();
-		// u.setId("3");
-		u.setPwd("123456");
-		u.setName("bass");
-		// u.setAddr("北京市");
-		u.setEmail("bass@shop.com");
-		// u.setZip("675565");
-		// u.setTel("1399833992");
-		// u.setSex("男");
-		// u.setScore(600);
-		//
-		CustomerDao cd = new CustomerDao();
-		System.out.println((cd.find("李滔") != null));
-		//cd.insert(u);
-		// System.out.println(cd.insert(u));
-		// cd.delete("3");
-		// cd.update(u);
-		// System.out.println(cd.find("1"));
-		// System.out.println(cd.findAll().toString());
 	}
 
 }

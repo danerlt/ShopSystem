@@ -65,7 +65,7 @@ public class DBUtil {
 	 *            预处理中的SQL语句中的参数
 	 * @return 查询后的结果集
 	 */
-	public ResultSet doQuery(String sql, String[] params) {
+	public ResultSet doQuery(String sql, Object[] params) {
 		try {
 			conn = DBUtil.getConnection();
 			// 获取PreparedStatement对象
@@ -73,7 +73,7 @@ public class DBUtil {
 			// 设置pstmt的参数
 			if (params != null) {
 				for (int i = 0; i < params.length; i++) {
-					pstmt.setString(i + 1, params[i]);
+					pstmt.setObject(i + 1, params[i]);
 				}
 			}
 			// 执行查询
@@ -113,7 +113,7 @@ public class DBUtil {
 	 *            预处理中的SQL语句中的参数
 	 * @return 受影响的行数
 	 */
-	public int doUpdate(String sql, String[] params) {
+	public int doUpdate(String sql, Object[] params) {
 		int n = 0;
 
 		// 取消Connection的自动提交
@@ -126,7 +126,7 @@ public class DBUtil {
 			// 设置pstmt的参数
 			if (params != null) {
 				for (int i = 0; i < params.length; i++) {
-					pstmt.setString(i + 1, params[i]);
+					pstmt.setObject(i + 1, params[i]);
 				}
 			}
 			// 执行更新

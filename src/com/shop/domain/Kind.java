@@ -15,6 +15,10 @@ public class Kind {
 	public void setkName(String kName) {
 		this.kName = kName;
 	}
+	@Override
+	public String toString() {
+		return "Kind [id=" + id + ", kName=" + kName + "]";
+	}
 	
 	
 }
