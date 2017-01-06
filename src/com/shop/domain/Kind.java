@@ -1,19 +1,20 @@
 package com.shop.domain;
 
 public class Kind {
-	private String ID;
-	private String Name;
-	public String getID() {
-		return ID;
+	private int id;
+	private String kName;
+	public int getId() {
+		return id;
 	}
-	public void setID(String id) {
-		ID = id;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getName() {
-		return Name;
+	public String getkName() {
+		return kName;
 	}
-	public void setName(String name) {
-		Name = name;
+	public void setkName(String kName) {
+		this.kName = kName;
 	}
+	
 	
 }

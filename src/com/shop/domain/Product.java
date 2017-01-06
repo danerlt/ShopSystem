@@ -1,72 +1,83 @@
 package com.shop.domain;
 
-import java.util.Date;
+import java.math.BigDecimal;
 
 public class Product {
-	private String prodID;
-	private String name;
-	private String kindID;
-	private String supID;
-	private int storage;
-	private Date prodDate;
-	private Date keepDate;
-	private double unitPrice;
-	private int supCount;
-
-	public String getProdID() {
-		return prodID;
+    private int id;
+    private String pName;
+    private String pDesc;
+    private java.util.Date pubTime;
+    private int pKeepTime;
+    private String pImage;
+    private String kId;
+    private BigDecimal iPrice;
+    private BigDecimal mPrice;
+    private String isHot;
+    private String isShow;
+	public int getId() {
+		return id;
 	}
-	public void setProdID(String prodID) {
-		this.prodID = prodID;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getpName() {
+		return pName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setpName(String pName) {
+		this.pName = pName;
 	}
-	public String getKindID() {
-		return kindID;
+	public String getpDesc() {
+		return pDesc;
 	}
-	public void setKindId(String kindID) {
-		this.kindID = kindID;
+	public void setpDesc(String pDesc) {
+		this.pDesc = pDesc;
 	}
-	public String getSupID() {
-		return supID;
+	public java.util.Date getPubTime() {
+		return pubTime;
 	}
-	public void setSupID(String supID) {
-		this.supID = supID;
+	public void setPubTime(java.util.Date pubTime) {
+		this.pubTime = pubTime;
 	}
-	public int getStorage() {
-		return storage;
+	public int getpKeepTime() {
+		return pKeepTime;
 	}
-	public void setStorage(int storage) {
-		this.storage = storage;
+	public void setpKeepTime(int pKeepTime) {
+		this.pKeepTime = pKeepTime;
 	}
-	public Date getProdDate() {
-		return prodDate;
+	public String getpImage() {
+		return pImage;
 	}
-	public void setProdDate(Date prodDate) {
-		this.prodDate = prodDate;
+	public void setpImage(String pImage) {
+		this.pImage = pImage;
 	}
-	public Date getKeepDate() {
-		return keepDate;
+	public String getkId() {
+		return kId;
 	}
-	public void setKeepDate(Date keepDate) {
-		this.keepDate = keepDate;
+	public void setkId(String kId) {
+		this.kId = kId;
 	}
-	public double getUnitPrice() {
-		return unitPrice;
+	public BigDecimal getiPrice() {
+		return iPrice;
 	}
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setiPrice(BigDecimal iPrice) {
+		this.iPrice = iPrice;
 	}
-	public int getSupCount() {
-		return supCount;
+	public BigDecimal getmPrice() {
+		return mPrice;
 	}
-	public void setSupCount(int supCount) {
-		this.supCount = supCount;
+	public void setmPrice(BigDecimal mPrice) {
+		this.mPrice = mPrice;
 	}
-	
-	
+	public String getIsHot() {
+		return isHot;
+	}
+	public void setIsHot(String isHot) {
+		this.isHot = isHot;
+	}
+	public String getIsShow() {
+		return isShow;
+	}
+	public void setIsShow(String isShow) {
+		this.isShow = isShow;
+	}
 }

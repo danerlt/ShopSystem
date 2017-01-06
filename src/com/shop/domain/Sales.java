@@ -1,32 +1,47 @@
 package com.shop.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Sales {
-	private long orderID;
-	private String customerID;
-	private double totAmt;
-	private Date orderDate;
-	private String invoiceID;
-	private String orderStatus;
-	private Date deliveryDate;
-	public long getOrderID() {
-		return orderID;
+    private long id;
+    private int cId;
+    private int pId;
+    private int count;
+    private BigDecimal totalPrice;
+    private Date orderDate;
+    private String invoiceNo;
+    private String orderStatus;
+    private Date delivDate;
+	public long getId() {
+		return id;
 	}
-	public void setOrderID(long orderID) {
-		this.orderID = orderID;
+	public void setId(long id) {
+		this.id = id;
 	}
-	public String getCustomerID() {
-		return customerID;
+	public int getcId() {
+		return cId;
 	}
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
+	public void setcId(int cId) {
+		this.cId = cId;
 	}
-	public double getTotAmt() {
-		return totAmt;
+	public int getpId() {
+		return pId;
 	}
-	public void setTotAmt(double totAmt) {
-		this.totAmt = totAmt;
+	public void setpId(int pId) {
+		this.pId = pId;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	public Date getOrderDate() {
 		return orderDate;
@@ -34,11 +49,11 @@ public class Sales {
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	public String getInvoiceID() {
-		return invoiceID;
+	public String getInvoiceNo() {
+		return invoiceNo;
 	}
-	public void setInvoiceID(String invoiceID) {
-		this.invoiceID = invoiceID;
+	public void setInvoiceNo(String invoiceNo) {
+		this.invoiceNo = invoiceNo;
 	}
 	public String getOrderStatus() {
 		return orderStatus;
@@ -46,11 +61,17 @@ public class Sales {
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
 	}
-	public Date getDeliveryDate() {
-		return deliveryDate;
+	public Date getDelivDate() {
+		return delivDate;
 	}
-	public void setDeliveryDate(Date deliveryDate) {
-		this.deliveryDate = deliveryDate;
+	public void setDelivDate(Date delivDate) {
+		this.delivDate = delivDate;
 	}
-
+	@Override
+	public String toString() {
+		return "Sales [id=" + id + ", cId=" + cId + ", pId=" + pId + ", count=" + count + ", totalPrice=" + totalPrice
+				+ ", orderDate=" + orderDate + ", invoiceNo=" + invoiceNo + ", orderStatus=" + orderStatus
+				+ ", delivDate=" + delivDate + "]";
+	}
+    
 }
