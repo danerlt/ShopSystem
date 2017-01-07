@@ -8,6 +8,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/admin.css" />
+<script type="text/javascript">
+
+	function addAdmin(){
+		window.location="addAdmin.jsp";	
+	}
+	function editAdmin(username){
+			window.location="editAdmin.jsp?username="+username;
+	}
+	function delAdmin(username){
+		
+			if(window.confirm("您确定要删除吗？删除之后不可以恢复哦！！！")){
+				window.location="DelAdmin?username="+username;
+			}
+	}
+</script>
 </head>
 <body>
 	<%!Admin a = new Admin();%>
@@ -20,10 +35,6 @@
 			a = ad.find(username);
 			if (a != null) {
 				request.setAttribute("Admin", a);
-				out.println("sucess");
-			}
-			if (a == null) {
-				out.println("not found");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
