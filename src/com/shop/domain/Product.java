@@ -6,6 +6,7 @@ public class Product {
     private int id;
     private String pName;
     private String pDesc;
+    private int pNum;
     private java.util.Date pubTime;
     private int pKeepTime;
     private String pImage;
@@ -85,5 +86,11 @@ public class Product {
 	}
 	public void setIsShow(String isShow) {
 		this.isShow = isShow;
+	}
+	public int getpNum() {
+		return pNum;
+	}
+	public void setpNum(int pNum) {
+		this.pNum = pNum;
 	}
 }

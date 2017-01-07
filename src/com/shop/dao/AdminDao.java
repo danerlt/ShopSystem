@@ -78,7 +78,7 @@ public class AdminDao extends DBUtil{
 	 * @return
 	 */
 	public Admin find(String name) {
-		String sql = "select * from admin where name = "+name;
+		String sql = "select * from admin where username = "+name;
 		try {
 			this.rs = this.doQuery(sql);
 			if (rs.next()) {
@@ -105,7 +105,7 @@ public class AdminDao extends DBUtil{
 	 * @return 找到用户就返回这个用户，找不到返回null
 	 */
 	public Admin find(String name, String password) {
-		String sql = "select * from admin where name =?";
+		String sql = "select * from admin where username =?";
 		Object[] params = { name };
 		try {
 			this.rs = this.doQuery(sql, params);

@@ -1,138 +1,228 @@
 package com.shop.dao;
 
-import java.sql.Connection;
 import java.util.ArrayList;
-
 import com.shop.domain.Product;
 import com.shop.utils.DBUtil;
 
-public class ProductDao extends DBUtil{
-	public boolean insert(Product p){
-		Connection conn=DBUtil.getConnection();
-		String sql="insert into customer values(?,?,?,?,?,?,?,?,?)";
-		String[] params={
-				p.getProdID(),
-				p.getName(),
-				p.getKindID(),
-				p.getSupID(),
-				String.valueOf(p.getStorage()),
-				String.valueOf(p.getProdDate()),
-				String.valueOf(p.getKeepDate()),
-				String.valueOf(p.getUnitPrice()),
-				String.valueOf(p.getSupCount())
-				};
+public class ProductDao extends DBUtil {
+	/**
+	 * 插入一个product对象
+	 * 
+	 * @param cust
+	 * @return
+	 */
+	public boolean insert(Product p) {
+		String sql = "insert into product(pName,pDesc,pNum,pubTime,pKeepTime,pImage,kId,iPrice,mPrice,isHot,isShow) values(?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params = { p.getpName(),p.getpDesc(),p.getpNum(),p.getPubTime(),p.getpKeepTime(),p.getpImage(),p.getkId(),p.getiPrice(),p.getmPrice(),p.getIsHot(),p.getIsShow()};
 		try {
-			this.pstmt=conn.prepareStatement(sql);
-			int n=this.doUpdate(sql,params);
-			if(n>0){
+			int n = this.doUpdate(sql, params);
+			if (n > 0) {
 				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			this.close();
 		}
+
 		return false;
 	}
-	public boolean delete(String id){
-		Connection conn=DBUtil.getConnection();
-		String sql="delete customer where prod_id=?";
-		String [] params={id};
+
+	/**
+	 * 按照ID删除商品
+	 * 
+	 * @param id 用户ID
+	 * @return
+	 */
+	public boolean delete(int id) {
+		String sql = "delete product where id="+id;
 		try {
-			this.pstmt=conn.prepareStatement(sql);
-			int n=this.doUpdate(sql,params);
-			if(n>0){
+			int n = this.doUpdate(sql);
+			if (n > 0) {
 				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			this.close();
 		}
 		return false;
 	}
-	public boolean update(Product p){
-		Connection conn=DBUtil.getConnection();
-		String sql="update product set prod_name=?,kind_no=?,sup_no=?,storage=?,prod_date=?,keep_date=?,unit_price=?,supply_count=? where prod_id=?";
-		String [] params={
-				p.getName(),
-				p.getKindID(),
-				p.getSupID(),
-				String.valueOf(p.getStorage()),
-				String.valueOf(p.getProdDate()),
-				String.valueOf(p.getKeepDate()),
-				String.valueOf(p.getUnitPrice()),
-				String.valueOf(p.getSupCount()),
-				p.getProdID()
-				};
+	/**
+	 * 按照ID删除用户
+	 * 
+	 * @param name 用户名
+	 * @return
+	 */
+	public boolean delete(String pname) {
+		String sql = "delete product where pName="+pname;
 		try {
-			this.pstmt=conn.prepareStatement(sql);
-			int n=this.doUpdate(sql,params);
-			if(n>0){
+			int n = this.doUpdate(sql);
+			if (n > 0) {
 				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			this.close();
 		}
 		return false;
 	}
-	public Product find(String id){
-		Connection conn=DBUtil.getConnection();
-		String sql="select * from product where prod_id=?";
-		String [] params={id};
-		try {
-			this.pstmt=conn.prepareStatement(sql);
-			this.rs=this.doQuery(sql,params);
-			if(rs.next()){
-				Product p=new Product();
-				p.setProdID(rs.getString(1));
-				p.setName(rs.getString(2));
-				p.setKindId(rs.getString(3));
-				p.setSupID(rs.getString(4));
-				p.setStorage(rs.getInt(5));
-				p.setProdDate(rs.getDate(6));
-				p.setKeepDate(rs.getDate(7));
-				p.setUnitPrice(rs.getDouble(8));
-				p.setSupCount(rs.getInt(9));
-				return p;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			this.close();
-		}
-		return null;
-	}
-	public ArrayList<Product> findAll(){
-		Connection conn=DBUtil.getConnection();
-		String sql="select * from product where prod_id";
-		String [] params=null;
-		try {
-			this.pstmt=conn.prepareStatement(sql);
-			this.rs=this.doQuery(sql,params);
-			ArrayList<Product> list=new ArrayList<Product>();
-			if(rs.next()){
-				Product p=new Product();
-				p.setProdID(rs.getString(1));
-				p.setName(rs.getString(2));
-				p.setKindId(rs.getString(3));
-				p.setSupID(rs.getString(4));
-				p.setStorage(rs.getInt(5));
-				p.setProdDate(rs.getDate(6));
-				p.setKeepDate(rs.getDate(7));
-				p.setUnitPrice(rs.getDouble(8));
-				p.setSupCount(rs.getInt(9));
-				list.add(p);
-			}
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			this.close();
-		}
-		return null;
-	} 
-	
+
+//	/**
+//	 * 修改用户
+//	 * 
+//	 * @param p
+//	 * @return
+//	 */
+//	public boolean update(Product p) {
+//		String sql = "update product set username=?,password=?,email=?,tel=?,sex=?,level=?,score=? where id=?";
+//		Object[] params = { p.getUsername(),p.getPassword(),p.getEmail(),p.getTel(),p.getSex(),p.getLevel(),p.getScore(),p.getId()};
+//		try {
+//			int n = this.doUpdate(sql, params);
+//			if (n > 0) {
+//				return true;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			this.close();
+//		}
+//		return false;
+//	}
+//
+//	/**
+//	 * 按照Name查找用户
+//	 * 
+//	 * @param id 用户ID 
+//	 * @return
+//	 */
+//	public Product find(int id) {
+//		String sql = "select * from product where id = "+id;
+//		try {
+//			this.rs = this.doQuery(sql);
+//			if (rs.next()) {
+//				Product p = new Product();
+//				p.setId(rs.getInt(1));
+//				p.setUsername(rs.getString(2));
+//				p.setPassword(rs.getString(3));
+//				p.setEmail(rs.getString(4));
+//				p.setTel(rs.getString(5));
+//				p.setSex(rs.getString(6));
+//				p.setLevel(rs.getInt(7));
+//				p.setScore(rs.getInt(8));
+//				return c;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			this.close();
+//		}
+//		return null;
+//	}
+//
+//	/**
+//	 * 按照Name查找用户
+//	 * 
+//	 * @param name 用户名
+//	 * @return
+//	 */
+//	public Product find(String name) {
+//		String sql = "select * from product where username =?";
+//		String[] params={name} ;
+//		try {
+//			this.rs = this.doQuery(sql,params);
+//			if (rs.next()) {
+//				Product p = new Product();
+//				p.setId(rs.getInt(1));
+//				p.setUsername(rs.getString(2));
+//				p.setPassword(rs.getString(3));
+//				p.setEmail(rs.getString(4));
+//				p.setTel(rs.getString(5));
+//				p.setSex(rs.getString(6));
+//				p.setLevel(rs.getInt(7));
+//				p.setScore(rs.getInt(8));
+//				return c;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			this.close();
+//		}
+//		return null;
+//	}
+//	/**
+//	 * 按照name和password查找用户
+//	 * 
+//	 * @param name 用户名
+//	 * @param password 密码
+//	 * @return 找到用户就返回这个用户，找不到返回null
+//	 */
+//	public Product find(String name, String password) {
+//		String sql = "select password from product where username =?";
+//		String[] params = { name };
+//		try {
+//			this.rs = this.doQuery(sql, params);
+//
+//			if (rs.next()) {
+//				String pwd = rs.getString(1);// 获取数据库中的cust_pwd
+//				if (pwd.equals(password)) {
+//					Product p = new Product();
+//					p.setId(rs.getInt(1));
+//					p.setUsername(rs.getString(2));
+//					p.setPassword(rs.getString(3));
+//					p.setEmail(rs.getString(4));
+//					p.setTel(rs.getString(5));
+//					p.setSex(rs.getString(6));
+//					p.setLevel(rs.getInt(7));
+//					p.setScore(rs.getInt(8));
+//					return c;
+//				}
+//			} else {
+//				return null;
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			this.close();
+//		}
+//		return null;
+//	}
+//
+//	/**
+//	 * 查找所有用户
+//	 * 
+//	 * @return
+//	 */
+//	public ArrayList<Product> findAll() {
+//		String sql = "select * from product ";
+//		ArrayList<Product> list = new ArrayList<Product>();
+//		String[] params = null;
+//		try {
+//			this.rs = this.doQuery(sql, params);
+//			while (rs.next()) {
+//				Product p = new Product();
+//				p.setId(rs.getInt(1));
+//				p.setUsername(rs.getString(2));
+//				p.setPassword(rs.getString(3));
+//				p.setEmail(rs.getString(4));
+//				p.setTel(rs.getString(5));
+//				p.setSex(rs.getString(6));
+//				p.setLevel(rs.getInt(7));
+//				p.setScore(rs.getInt(8));
+//				list.add(c);
+//			}
+//			return list;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			this.close();
+//		}
+//		return null;
+//	}
+//
+//	public static void main(String[] args) {
+//	}
+//
 }

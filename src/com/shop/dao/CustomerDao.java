@@ -129,9 +129,10 @@ public class CustomerDao extends DBUtil {
 	 * @return
 	 */
 	public Customer find(String name) {
-		String sql = "select * from customer where username ="+name ;
+		String sql = "select * from customer where username =?";
+		String[] params={name} ;
 		try {
-			this.rs = this.doQuery(sql);
+			this.rs = this.doQuery(sql,params);
 			if (rs.next()) {
 				Customer c = new Customer();
 				c.setId(rs.getInt(1));
