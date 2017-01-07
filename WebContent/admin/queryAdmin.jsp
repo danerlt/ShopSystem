@@ -9,23 +9,29 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/admin.css" />
 <script type="text/javascript">
+	function addAdmin() {
+		window.location = "addAdmin.jsp";
+	}
+	function editAdmin(username) {
+		window.location = "editAdmin.jsp?username=" + username;
+	}
+	function delAdmin(username) {
 
-	function addAdmin(){
-		window.location="addAdmin.jsp";	
+		if (window.confirm("您确定要删除吗？删除之后不可以恢复哦！！！")) {
+			window.location = "DelAdmin?username=" + username;
+		}
 	}
-	function editAdmin(username){
-			window.location="editAdmin.jsp?username="+username;
-	}
-	function delAdmin(username){
-		
-			if(window.confirm("您确定要删除吗？删除之后不可以恢复哦！！！")){
-				window.location="DelAdmin?username="+username;
-			}
+	function adminIsEmpty(){
+		if(document.getElementById("#username")){
+		alert("没有找到！");
+		}
 	}
 </script>
 </head>
 <body>
-	<%!Admin a = new Admin();%>
+	<%!Admin a = new Admin();
+	   int dianji=0;
+	%>
 	<%
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -35,31 +41,34 @@
 			a = ad.find(username);
 			if (a != null) {
 				request.setAttribute("Admin", a);
+			}else if(dianji > 0){
+			    out.println("<script>alert('没找到！');</script>");
 			}
+			dianji++;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		%>
+	%>
 	<form action="queryAdmin.jsp">
 		<label for="">请输入管理员名：</label> <input name="username" type="text" />
-		<input type="submit" value="查询" />
+		<input type="submit" value="查询" onclick="adminIsEmpty()"/>
 	</form>
-	<!--表格-->
-	<table class="table">
-		<thead>
-			<tr>
-				<th width="15%">管理员名</th>
-				<th width="20%">密码</th>
-				<th width="20%">邮箱</th>
-				<th width="20%">等级</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${not empty requestScope.Admin}">
+	<c:if test="${not empty requestScope.Admin}">
+		<!--表格-->
+		<table class="table">
+			<thead>
 				<tr>
-					<td width="15%"><label id="username" for="username"
-						class="label">${requestScope.Admin.username}</label></td>
+					<th width="15%">管理员名</th>
+					<th width="20%">密码</th>
+					<th width="20%">邮箱</th>
+					<th width="20%">等级</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td width="15%" id="username" 
+						class="label">${requestScope.Admin.username}</td>
 					<td width="20%">${requestScope.Admin.password}</td>
 					<td width="20%">${requestScope.Admin.email}</td>
 					<td width="20%">${requestScope.Admin.level}</td>
@@ -68,9 +77,8 @@
 						<input id="del" type="button" value="删除" class="btn"
 						onclick="delAdmin('${requestScope.Admin.username}')"></td>
 				</tr>
-			</c:if>
-
-		</tbody>
-	</table>
+			</tbody>
+		</table>
+	</c:if>
 </body>
 </html>
