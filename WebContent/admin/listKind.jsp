@@ -11,18 +11,18 @@
 <script src="../js/admin.js"></script>
 </head>
 <body>
-	<%!ArrayList<Admin> listAdmin;
+	<%!ArrayList<Kind> listKind;
 %>
 	<% 
-  AdminDao ad = new AdminDao();
-  listAdmin = ad.findAll();
-  session.setAttribute("listAdmin", listAdmin);
+  KindDao kd = new KindDao();
+  listKind = kd.findAll();
+  session.setAttribute("listKind", listKind);
 %>
 	<div class="details">
 		<div class="details_operation clearfix">
 			<div class="bui_select">
 				<input type="button" value="添&nbsp;&nbsp;加" class="add"
-					onclick="addAdmin()">
+					onclick="addKind()">
 			</div>
 
 		</div>
@@ -30,25 +30,21 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th width="15%">管理员名</th>
-					<th width="20%">密码</th>
-					<th width="20%">邮箱</th>
-					<th width="20%">等级</th>
+					<th width="25%">分类序号</th>
+					<th width="30%">分类名称</th>
 					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="admin" items="${sessionScope.listAdmin}">
+				<c:forEach var="kind" items="${sessionScope.listKind}">
 					<tr>
-						<td width="15%"><label id="username" for="username"
-							class="label">${admin.username}</label></td>
-						<td width="20%">${admin.password}</td>
-						<td width="20%">${admin.email}</td>
-						<td width="20%">${admin.level}</td>
+						
+						<td width="25%">${kind.id}</td>
+						<td width="30%">${kind.kName}</td>
 						<td align="center"><input id="edit" type="button" value="修改"
-							class="btn" onclick="editAdmin('${admin.username}')"> <input
+							class="btn" onclick="editKind('${kind.id}')"> <input
 							id="del" type="button" value="删除" class="btn"
-							onclick="delAdmin('${admin.username}')"></td>
+							onclick="delKind('${kind.id}')"></td>
 					</tr>
 				</c:forEach>
 			</tbody>

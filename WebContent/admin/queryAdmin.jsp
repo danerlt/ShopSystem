@@ -8,25 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/admin.css" />
-<script type="text/javascript">
-	function addAdmin() {
-		window.location = "addAdmin.jsp";
-	}
-	function editAdmin(username) {
-		window.location = "editAdmin.jsp?username=" + username;
-	}
-	function delAdmin(username) {
-
-		if (window.confirm("您确定要删除吗？删除之后不可以恢复哦！！！")) {
-			window.location = "DelAdmin?username=" + username;
-		}
-	}
-	function adminIsEmpty(){
-		if(document.getElementById("#username")){
-		alert("没有找到！");
-		}
-	}
-</script>
+<script src="../js/admin.js"></script>
 </head>
 <body>
 	<%!Admin a = new Admin();

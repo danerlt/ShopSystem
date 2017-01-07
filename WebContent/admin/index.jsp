@@ -25,6 +25,9 @@
 	  $("#admin").click(function(){
 		  $("#adminMenu").toggle();
 	  });
+	  $("#kind").click(function(){
+		  $("#kindMenu").toggle();
+	  });
   });
   
 </script>
@@ -52,13 +55,18 @@
 					    	<li><a href="deleteProduct.jsp" target="mainFrame">删除商品</a></li>
 					    </ul>
 					</li>
-					<li><a href="">分类管理</a></li>
+					<li><a id="kind" href="listKind.jsp" target="mainFrame">分类管理</a>
+					     <ul id="kindMenu" class="submenu">
+					    	<li><a href="queryKind.jsp" target="mainFrame">查询分类信息</a></li>
+					    	<li><a href="addKind.jsp" target="mainFrame">添加分类信息</a></li>
+					    </ul>
+					</li>
 					<li><a href="">订单管理</a></li>
 					<li><a href="">用户管理</a></li>
 					<li><a id="admin" href="listAdmin.jsp" target="mainFrame">管理员管理</a>
 					    <ul id="adminMenu" class="submenu">
 					    	<li><a href="queryAdmin.jsp" target="mainFrame">查询管理员</a></li>
-					    	<li><a href="addAdmin.jsp" target="mainFrame"> 添加管理员</a></li>
+					    	<li><a href="addAdmin.jsp" target="mainFrame">添加管理员</a></li>
 					    </ul>
 					</li>
 				</ul>
