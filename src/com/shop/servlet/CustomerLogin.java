@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import com.shop.dao.*;
 import com.shop.domain.*;
-public class LoginServlet extends HttpServlet{
+public class CustomerLogin extends HttpServlet{
 	/**
 	 * 
 	 */

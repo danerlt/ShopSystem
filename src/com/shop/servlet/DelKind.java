@@ -1,36 +1,36 @@
 package com.shop.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.shop.dao.AdminDao;
-import com.shop.domain.Admin;
-public class AdminLogin extends HttpServlet {
+
+import com.shop.dao.KindDao;
+
+public class DelKind extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public AdminLogin() {
+    public DelKind() {
         super();
     }
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
-			String name = request.getParameter("name").trim();
-			String password = request.getParameter("password").trim();
-			AdminDao ad = new AdminDao();
-			Admin admin = ad.find(name, password);
-			if( admin != null) {
-				//查找到用户
-				request.getSession().setAttribute("admin", admin);
-				RequestDispatcher rd = request.getRequestDispatcher("/admin/index.jsp");
-				rd.forward(request, response);
-			}else {
-				System.out.println("登录失败！");
+			request.setCharacterEncoding("UTF-8");
+			PrintWriter out = response.getWriter();
+			String kName = request.getParameter("kName");
+			KindDao kd = new KindDao();
+			boolean delsucess = kd.delete(kName);
+			if(delsucess == true){
+				out.println("delete kind sucess!");
+			}else{
+				out.println("delete kind failed!");
 			}
-
+			String stayTime = "3000";
+			String URL = "listAdmin.jsp";
+			String content=stayTime+";URL="+URL;
+			response.setHeader("REFRESH",content); 
 		}catch(Exception e){
 			e.printStackTrace();
 		}

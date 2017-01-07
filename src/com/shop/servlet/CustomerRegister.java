@@ -11,7 +11,7 @@ import com.shop.dao.CustomerDao;
 import com.shop.domain.Customer;
 import com.shop.utils.DBUtil;
 
-public class RegisteServlet extends HttpServlet {
+public class CustomerRegister extends HttpServlet {
 	/**
 	 * 
 	 */
