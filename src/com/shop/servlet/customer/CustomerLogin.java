@@ -1,4 +1,4 @@
-package com.shop.servlet;
+package com.shop.servlet.customer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;

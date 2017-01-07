@@ -36,7 +36,7 @@ public class KindDao extends DBUtil{
 	 * @return true：删除成功;false： 删除失败
 	 */
 	public boolean delete(int id) {
-		String sql = "delete kind where id=?";
+		String sql = "delete from kind where id=?";
 		Object[] params = { id};
 		try {
 			int n = this.doUpdate(sql, params);
@@ -50,7 +50,27 @@ public class KindDao extends DBUtil{
 		}
 		return false;
 	}
-
+	/**
+	 * 按照id删除分类
+	 * 
+	 * @param id
+	 * @return true：删除成功;false： 删除失败
+	 */
+	public boolean delete(String kname) {
+		String sql = "delete from kind where kName=?";
+		Object[] params = { kname};
+		try {
+			int n = this.doUpdate(sql, params);
+			if (n > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return false;
+	}
 	/**
 	 * 修改分类信息
 	 * 
@@ -105,7 +125,7 @@ public class KindDao extends DBUtil{
 	 * @return 找到分类信息就返回这个分类，找不到返回null
 	 */
 	public Kind find(int id) {
-		String sql = "select * from Kind where id =?";
+		String sql = "select * from Kind where id =? ";
 		Object[] params = { id};
 		try {
 			this.rs = this.doQuery(sql, params);
@@ -133,7 +153,7 @@ public class KindDao extends DBUtil{
 	 * @return
 	 */
 	public ArrayList<Kind> findAll() {
-		String sql = "select * from kind ";
+		String sql = "select * from kind order by id";
 		ArrayList<Kind> list = new ArrayList<Kind>();
 		try {
 			this.rs = this.doQuery(sql);

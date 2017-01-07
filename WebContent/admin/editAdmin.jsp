@@ -17,7 +17,7 @@ try{
 	out.println(username);
 	AdminDao ad = new AdminDao();
 	a = ad.find(username);
-	request.setAttribute("Admin", a);
+	session.setAttribute("Admin", a);
 }catch(Exception e){
 	e.printStackTrace();
 }
@@ -27,19 +27,19 @@ try{
 		<table>
 			<tr>
 				<td>管理员名称</td>
-				<td><input name="username" type="text" value="${requsetScope.Admin.username}" placeholder="${requsetScope.admin.username}"/></td>
+				<td><input name="username" type="text" value="${sessionScope.Admin.username}" /></td>
 			</tr>
 			<tr>
 				<td>管理员密码</td>
-				<td><input name="password" type="text" value="${requsetScope.Admin.password}" placeholder="${requsetScope.admin.password}"></td>
+				<td><input name="password" type="text" value="${sessionScope.Admin.password}" ></td>
 			</tr>
 			<tr>
 				<td>管理员邮箱</td>
-				<td><input name="email" type="email" value="${requsetScope.Admin.email}" placeholder="${requsetScope.admin.email}"/></td>
+				<td><input name="email" type="email" value="${sessionScope.Admin.email}" /></td>
 			</tr>
 			<tr>
 				<td>权限等级</td>
-				<td><input name="level" type="number" min="1" max="3" value="${requsetScope.Admin.level}" placeholder="${requsetScope.admin.level}"/></td>
+				<td><input name="level" type="number" min="1" max="3" value="${sessionScope.Admin.level}" /></td>
 			</tr>
 			<tr>
 			    <td rowspan="2"><input type="submit" value="修改"/></td>

@@ -1,4 +1,4 @@
-package com.shop.servlet;
+package com.shop.servlet.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,37 +8,35 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.shop.dao.AdminDao;
-import com.shop.domain.Admin;
-public class EditAdmin extends HttpServlet {
+import com.shop.utils.DBUtil;
+
+public class AddAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public EditAdmin() {
+       
+    public AddAdmin() {
         super();
     }
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 doPost(request, response);
+        doPost(request, response);
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			request.setCharacterEncoding("UTF-8");
-			PrintWriter out = response.getWriter();
-			Admin a = new Admin();
-			AdminDao ad = new AdminDao();
 			String username =  request.getParameter("username");
 			String password = request.getParameter("password");
 			String email = request.getParameter("email");
 			int level = Integer.parseInt(request.getParameter("level"));
-			
-			a.setUsername(username);
-			a.setPassword(password);
-			a.setEmail(email);
-			a.setLevel(level);
-			
-			boolean isUpdate = ad.update(a);
-			if(isUpdate == true){
-				out.println("update admin sucess!");
+			PrintWriter out = response.getWriter();
+			DBUtil db = new DBUtil();
+			String sql = "insert into admin values(?,?,?,?)";
+			Object[] params = {username,password,email,level};
+			int n = db.doUpdate(sql, params);
+			if(n > 0){
+				out.println("add admin sucess!");
 			}else {
-				out.println("update admin failed!");
+				out.println("add admin failed!");
 			}
 			String stayTime = "3000";
 			String URL = "listAdmin.jsp";

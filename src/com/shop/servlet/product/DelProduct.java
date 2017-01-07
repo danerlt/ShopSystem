@@ -1,4 +1,4 @@
-package com.shop.servlet;
+package com.shop.servlet.product;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class QueryKindServlet
+ * Servlet implementation class DelProduct
  */
-@WebServlet("/QueryKindServlet")
-public class QueryKind extends HttpServlet {
+@WebServlet("/DelProduct")
+public class DelProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QueryKind() {
+    public DelProduct() {
         super();
         // TODO Auto-generated constructor stub
     }

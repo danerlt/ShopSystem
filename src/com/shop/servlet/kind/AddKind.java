@@ -1,4 +1,4 @@
-package com.shop.servlet;
+package com.shop.servlet.kind;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

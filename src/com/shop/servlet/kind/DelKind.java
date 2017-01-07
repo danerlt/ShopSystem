@@ -1,4 +1,4 @@
-package com.shop.servlet;
+package com.shop.servlet.kind;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,31 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.shop.utils.DBUtil;
+import com.shop.dao.KindDao;
 
-public class EditKind extends HttpServlet {
+public class DelKind extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public EditKind() {
+    public DelKind() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request,response);
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			request.setCharacterEncoding("UTF-8");
 			PrintWriter out = response.getWriter();
 			int id = Integer.parseInt(request.getParameter("id"));
-			String kname = request.getParameter("kName");
-			
-			DBUtil db = new DBUtil();
-			String sql = "update kind kName=? where id=?";
-			Object[] params = {id,kname};
-			int n = db.doUpdate(sql, params);
-			if(n > 0) {
-				out.println("edit kind sucess!");
-			}else {
-				out.println("edit kind failed!");
+			KindDao kd = new KindDao();
+			boolean delsucess = kd.delete(id);
+			if(delsucess == true){
+				out.println("delete kind sucess!");
+			}else{
+				out.println("delete kind failed!");
 			}
 			String stayTime = "3000";
 			String URL = "listKind.jsp";
@@ -41,6 +34,10 @@ public class EditKind extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

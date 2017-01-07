@@ -10,14 +10,13 @@
 </head>
 <body>
 
-<%!Kind a = new Kind();%>
+<%!Kind k = new Kind();%>
 <%
 try{
-	String username = request.getParameter("username");
-	out.println(username);
-	KindDao ad = new KindDao();
-	a = ad.find(username);
-	request.setAttribute("Kind", a);
+	int id = Integer.parseInt(request.getParameter("id"));
+	KindDao kd = new KindDao();
+	k = kd.find(id);
+	session.setAttribute("Kind",k);
 }catch(Exception e){
 	e.printStackTrace();
 }
@@ -26,20 +25,12 @@ try{
 	<form action="EditKind" method="post">
 		<table>
 			<tr>
-				<td>管理员名称</td>
-				<td><input name="username" type="text" value="${requsetScope.Kind.username}" placeholder="${requsetScope.Kind.username}"/></td>
+				<td>分类序号</td>
+				<td><input name="id" type="text" value="${sessionScope.Kind.id}" /></td>
 			</tr>
 			<tr>
-				<td>管理员密码</td>
-				<td><input name="password" type="text" value="${requsetScope.Kind.password}" placeholder="${requsetScope.Kind.password}"></td>
-			</tr>
-			<tr>
-				<td>管理员邮箱</td>
-				<td><input name="email" type="email" value="${requsetScope.Kind.email}" placeholder="${requsetScope.Kind.email}"/></td>
-			</tr>
-			<tr>
-				<td>权限等级</td>
-				<td><input name="level" type="number" min="1" max="3" value="${requsetScope.Kind.level}" placeholder="${requsetScope.Kind.level}"/></td>
+				<td>分类名称</td>
+				<td><input name="kName" type="text" value="${sessionScope.Kind.kName}" /></td>
 			</tr>
 			<tr>
 			    <td rowspan="2"><input type="submit" value="修改"/></td>

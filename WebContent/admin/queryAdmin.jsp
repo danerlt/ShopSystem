@@ -12,21 +12,21 @@
 </head>
 <body>
 	<%!Admin a = new Admin();
-	   int dianji=0;
 	%>
 	<%
 		try {
 			request.setCharacterEncoding("UTF-8");
 			String username = request.getParameter("username");
+			if(username != null && !username.equals("")){
 			AdminDao ad = new AdminDao();
 			Admin a = new Admin();
 			a = ad.find(username);
 			if (a != null) {
 				request.setAttribute("Admin", a);
-			}else if(dianji > 0){
+			}else{
 			    out.println("<script>alert('没找到！');</script>");
 			}
-			dianji++;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

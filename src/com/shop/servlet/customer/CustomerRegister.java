@@ -1,4 +1,4 @@
-package com.shop.servlet;
+package com.shop.servlet.customer;
 
 import java.io.PrintWriter;
 
