@@ -59,17 +59,17 @@ font {
 						<div class="form-group">
 							<label for="username" class="col-sm-2 control-label">用户名</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="username"
-									name="cust_name" placeholder="请输入用户名"
-									onblur="haveUser(this.value)">
+								<input name="username" type="text" class="form-control" id="username"
+									 placeholder="请输入用户名"
+									>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="inputPassword" class="col-sm-2 control-label">密码</label>
 							<div class="col-sm-6">
-								<input type="password" class="form-control" id="inputPassword"
-									name="cust_pwd" placeholder="请输入密码">
+								<input name="password"  type="password" class="form-control" id="password"
+									placeholder="请输入密码">
 							</div>
 						</div>
 
@@ -82,16 +82,16 @@ font {
 						</div>
 
 						<div class="form-group">
-							<label for="inputEmail" class="col-sm-2 control-label">Email</label>
+							<label for="inputTel" class="col-sm-2 control-label">手机</label>
 							<div class="col-sm-6">
-								<input type="email" class="form-control" id="inputEmail"
-									name="email" placeholder="Email">
+								<input name="tel" id="tel" type="tel" class="form-control" id="inputTel"
+									 placeholder="手机">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<input type="submit" width="100" value="注册" name="submit"
+								<input type="submit" width="100" value="注册" name="submit" "
 									
 									style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
 							</div>

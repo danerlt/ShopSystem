@@ -1,184 +1,201 @@
-CREATE DATABASE shopsystem
-IF NOT EXISTS USE shopsystem;
+USE shopsystem;
 
--- 建立customer表
+-- 建立customer表 客户表
 DROP TABLE
 IF EXISTS `customer`;
 
 CREATE TABLE `customer` (
-	`cust_id` VARCHAR (20) NOT NULL,
-	`cust_pwd` CHAR (32) NOT NULL,
-	`cust_name` VARCHAR (64) NOT NULL,
-	`addr` VARCHAR (64) NULL DEFAULT NULL,
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR (64) NOT NULL,
+	`password` VARCHAR (32) NOT NULL,
 	`email` VARCHAR (32) NULL DEFAULT NULL,
-	`zip` CHAR (6) NULL DEFAULT NULL,
 	`tel` CHAR (20) NULL DEFAULT NULL,
-	`sex` CHAR (2) NULL DEFAULT NULL,
-	`cust_level` TINYINT (4) NULL DEFAULT 1,
-	`cust_sco` INT (11) NULL DEFAULT 0,
-	PRIMARY KEY (`cust_id`)
-) ENGINE = INNODB DEFAULT CHARACTER
+	`sex` enum ('男', '女', '保密') NOT NULL DEFAULT '保密',
+	`level` TINYINT (4) NULL DEFAULT 1,
+	`score` INT (11) NULL DEFAULT 0,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `username` (`username`)
+) ENGINE = INNODB AUTO_INCREMENT = 10000 DEFAULT CHARACTER
 SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
--- 建立discount
+-- customer表的测试数据
+INSERT INTO `customer`
+VALUES
+	(
+		10000,
+		'李滔',
+		'litao',
+		'litao@shop.com',
+		'15959787657',
+		'男',
+		1,
+		50
+	),
+	(
+		10002,
+		'test',
+		'test',
+		'litao@shop.com',
+		'15959787657',
+		'男',
+		1,
+		50
+	),
+	(
+		10003,
+		'haha',
+		'haha',
+		'litao@shop.com',
+		'15959787657',
+		'男',
+		1,
+		50
+	);
+
+-- 建立kind表 商品类别表
 DROP TABLE
-IF EXISTS `discount`;
+IF EXISTS `kind`;
 
-CREATE TABLE `discount` (
-	`cust_level` TINYINT NOT NULL PRIMARY KEY,
-	`discount` NUMERIC (7, 2) NULL DEFAULT 1,
-	`score` VARCHAR (64) NULL DEFAULT NULL
-) ENGINE = INNODB DEFAULT CHARACTER
+CREATE TABLE kind (
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`kName` VARCHAR (16),
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `kname` (`kname`)
+) ENGINE = INNODB AUTO_INCREMENT = 1 DEFAULT CHARACTER
 SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+
+INSERT INTO `kind`
+VALUES
+	(1, '手机数码'),
+	(2, '电脑办公'),
+	(3, '图书音频'),
+	(4, '服装');
 
 -- 建立product表
 DROP TABLE
 IF EXISTS `product`;
 
 CREATE TABLE `product` (
-	`prod_id` VARCHAR (6) NOT NULL PRIMARY KEY,
-	`prod_name` VARCHAR (64) NULL,
-	`kind_no` VARCHAR (6) NULL,
-	`sup_no` CHAR (6) NULL,
-	`storage` INT NULL,
-	`pro_date` datetime NULL,
-	`keep_date` datetime NULL,
-	`unit_price` NUMERIC (7, 2) NULL,
-	`supply_count` INT NULL
-) ENGINE = INNODB DEFAULT CHARACTER
+	`id` INT AUTO_INCREMENT NOT NULL,
+	`pName` VARCHAR (64) NULL,
+	`pDesc` text,
+	`pNum` INT NULL,
+	`pubTime` datetime NULL,
+	`pKeepTime` datetime NULL,
+	`pImage` VARCHAR (255) NULL,
+	`kId` INT NOT NULL,
+	`iPrice` NUMERIC (7, 2) NULL,
+	`mPrice` NUMERIC (7, 2) NULL,
+	`isHot` enum ('是', '否') NOT NULL DEFAULT '否',
+	`isShow` enum ('是', '否') NOT NULL DEFAULT '否',
+	PRIMARY KEY (`id`),
+	CONSTRAINT `fk_kid` FOREIGN KEY (`kId`) REFERENCES `kind` (`id`),
+	UNIQUE KEY `pName` (`pName`),
+	ON UPDATE CASCADE,
+	ON DELETE CASCADE
+) ENGINE = INNODB AUTO_INCREMENT = 10000 DEFAULT CHARACTER
 SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
--- 建立kind表
-DROP TABLE
-IF EXISTS `kind`;
-
-CREATE TABLE kind (
-	`kind_no` VARCHAR (8) PRIMARY KEY,
-	`kind_name` VARCHAR (16)
-) ENGINE = INNODB DEFAULT CHARACTER
-SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
-
--- 建立company表
-DROP TABLE
-IF EXISTS `company`;
-
-CREATE TABLE company (
-	`sup_no` CHAR (6) PRIMARY KEY,
-	`sup_name` VARCHAR (40) NULL,
-	`sup_addr` VARCHAR (60) NULL
-) ENGINE = INNODB DEFAULT CHARACTER
-SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+-- product表的测试数据
+INSERT INTO `product`
+VALUES
+	(
+		10000,
+		'小米note3',
+		'小米note3全网通',
+		1000,
+		'2015-12-11 00:00:00',
+		360,
+		'/image/**.img',
+		1,
+		999,
+		1199,
+		'是',
+		'否'
+	);
 
 DROP TABLE
 IF EXISTS `sales`;
 
 -- 建立sales表
 CREATE TABLE sales (
-	`order_no` BIGINT PRIMARY KEY,
-	`cust_id` VARCHAR (32) NULL,
-	`tot_amt` NUMERIC (7, 2) NULL,
-	`order_date` datetime NULL,
-	`invoice_no` CHAR (15) NULL UNIQUE,
-	`order_status` CHAR (2) NULL DEFAULT '0',
-	`deliv_date` datetime NULL
-) ENGINE = INNODB DEFAULT CHARACTER
+	`id` BIGINT AUTO_INCREMENT,
+	`cId` INT NOT NULL,
+	`pId` INT NOT NULL,
+	`count` INT NULL,
+	`totalPrice` NUMERIC (7, 2) NULL UNIQUE,
+	`orderDate` DATETIME NULL,
+	`invoiceNo` CHAR (15) NULL,
+	`orderStatus` VARCHAR (10) NULL,
+	`delivDate` DATETIME NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `fk_cid` FOREIGN KEY (`cId`) REFERENCES `customer` (`id`),
+	CONSTRAINT `fk_pid` FOREIGN KEY (`pId`) REFERENCES `product` (`id`),
+	ON UPDATE CASCADE,
+	ON DELETE CASCADE
+) ENGINE = INNODB AUTO_INCREMENT = 1000000000 DEFAULT CHARACTER
 SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
-DROP TABLE
-IF EXISTS `sale_item`;
-
--- 建立sale_item表
-CREATE TABLE sale_item (
-	`order_no` BIGINT NOT NULL,
-	`prod_id` CHAR (6) NOT NULL,
-	`unit_price` NUMERIC (7, 2) NULL,
-	`dis_price` NUMERIC (7, 2) NULL,
-	`qty` INT NULL,
-	`order_date` datetime NULL,
-	PRIMARY KEY (`order_no`, `prod_id`)
-) ENGINE = INNODB DEFAULT CHARACTER
-SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+-- sales测试数据
+INSERT INTO sales
+VALUES
+	(
+		1000000000,
+		10000,
+		10000,
+		2,
+		1998,
+		'2015-12-21 00:00:00',
+		'987657898787897',
+		'已发货',
+		'2015-12-22 00:00:00'
+	);
 
 DROP TABLE
 IF EXISTS `shopcart`;
 
 -- 建立shopcart表
 CREATE TABLE shopcart (
-	`shop_no` CHAR (5) NOT NULL,
-	`cust_id` VARCHAR (20) NOT NULL,
-	`prod_id` VARCHAR (6) NOT NULL,
-	`unit_price` NUMERIC (7, 2) NULL,
-	`dis_price` NUMERIC (7, 2) NULL DEFAULT 0,
-	`qty` INT NULL DEFAULT 0,
-	`buy` CHAR (4) NULL DEFAULT '是',
-	`pro_totamt` NUMERIC (7, 2) NULL DEFAULT 0,
-	PRIMARY KEY (
-		`shop_no`,
-		`cust_id`,
-		`prod_id`
-	)
-) ENGINE = INNODB DEFAULT CHARACTER
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`cId` INT NOT NULL,
+	`pId` INT NOT NULL,
+	`count` INT NULL,
+	`isBuy` enum ('是', '否') NOT NULL DEFAULT '否',
+	`totalPrice` NUMERIC (7, 2) NULL,
+	PRIMARY KEY (`id`),
+	CONSTRAINT `fk_cid` FOREIGN KEY (`cId`) REFERENCES `customer` (`id`),
+	CONSTRAINT `fk_pid` FOREIGN KEY (`pId`) REFERENCES `product` (`id`),
+	ON UPDATE CASCADE,
+	ON DELETE CASCADE
+) ENGINE = INNODB AUTO_INCREMENT = 1 DEFAULT CHARACTER
 SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
-DROP TABLE
-IF EXISTS `delivery`;
-
--- 建立delivery表
-CREATE TABLE delivery (
-	`deliv_no` CHAR (10) NULL,
-	`cust_id` CHAR (6) NULL,
-	`order_no` BIGINT NULL,
-	`prod_id` CHAR (6) NULL,
-	`qty` INT NULL,
-	`unit_price` NUMERIC (7, 2) NULL,
-	`tot_amt` NUMERIC (9, 2) NULL,
-	`zip` CHAR (6),
-	`addr` CHAR (60),
-	`tel_no` CHAR (11) NULL,
-	`deliv_date` datetime NULL,
-	`cust_name` CHAR (8) NULL
-) ENGINE = INNODB DEFAULT CHARACTER
-SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
-
-DROP TABLE
-IF EXISTS `quit`;
-
--- 建立quit表
-CREATE TABLE quit (
-	`quit_no` CHAR (10) NOT NULL,
-	`cust_id` VARCHAR (20) NOT NULL,
-	`order_no` BIGINT NOT NULL,
-	`deliv_date` datetime NULL,
-	`quit_reason` CHAR (50) NULL,
-	`prod_id` CHAR (6) NULL,
-	`qty` INT NULL,
-	`cust_name` CHAR (8) NULL,
-	PRIMARY KEY (
-		`quit_no`,
-		`cust_id`,
-		`order_no`
-	)
-) ENGINE = INNODB DEFAULT CHARACTER
-SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
-
-DROP TABLE
-IF EXISTS `warehouse`;
-
--- 建立warehouse表
-CREATE TABLE warehouse (
-	`wh_no` CHAR (5) NOT NULL PRIMARY KEY,
-	`wh_name` CHAR (64) NULL
-) ENGINE = INNODB DEFAULT CHARACTER
-SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
-
+-- 建立admin表 客户表
 DROP TABLE
 IF EXISTS `admin`;
 
--- 建立warehouse表
-CREATE TABLE admin (
-	`name` VARCHAR (45) NOT NULL,
-	`notes` VARCHAR (255) DEFAULT NULL,
+CREATE TABLE `admin` (
+	`username` VARCHAR (64) NOT NULL,
 	`password` VARCHAR (32) NOT NULL,
-	PRIMARY KEY (`name`)
+	`email` VARCHAR (32) NULL DEFAULT NULL,
+	`level` TINYINT (4) NULL DEFAULT 1,
+	PRIMARY KEY (`username`)
 ) ENGINE = INNODB DEFAULT CHARACTER
 SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+
+-- customer表的测试数据
+INSERT INTO `admin`
+VALUES
+	(
+		'root',
+		'root',
+		'root@shop.com',
+		1
+	),
+	(
+		'admin',
+		'admin',
+		'admin@shop.com',
+		2
+	);
+

@@ -32,4 +32,44 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminLoginServlet</servlet-name>
+    <servlet-class>com.shop.servlet.AdminLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminLoginServlet</servlet-name>
+    <url-pattern>/admin/AdminLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddAdminServlet</servlet-name>
+    <servlet-class>com.shop.servlet.AddAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddAdminServlet</servlet-name>
+    <url-pattern>/admin/AddAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DelAdminServlet</servlet-name>
+    <servlet-class>com.shop.servlet.DelAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DelAdminServlet</servlet-name>
+    <url-pattern>/admin/DelAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditAdminServlet</servlet-name>
+    <servlet-class>com.shop.servlet.EditAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditAdminServlet</servlet-name>
+    <url-pattern>/admin/EditAdmin</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>QueryAdminServlet</servlet-name>
+    <servlet-class>com.shop.servlet.QueryAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QueryAdminServlet</servlet-name>
+    <url-pattern>/admin/QueryAdmin</url-pattern>
+  </servlet-mapping>
 </web-app>

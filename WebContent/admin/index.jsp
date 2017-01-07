@@ -55,12 +55,10 @@
 					<li><a href="">分类管理</a></li>
 					<li><a href="">订单管理</a></li>
 					<li><a href="">用户管理</a></li>
-					<li><a id="admin" href="#">管理员管理</a>
+					<li><a id="admin" href="listAdmin.jsp" target="mainFrame">管理员管理</a>
 					    <ul id="adminMenu" class="submenu">
-					    	<li><a href="listAdmin.jsp" target="mainFrame">显示所有管理员</a></li>
 					    	<li><a href="queryAdmin.jsp" target="mainFrame">查询管理员</a></li>
 					    	<li><a href="addAdmin.jsp" target="mainFrame"> 添加管理员</a></li>
-					    	<li><a href="editAdmin.jsp" target="mainFrame">修改管理员</a></li>
 					    </ul>
 					</li>
 				</ul>
