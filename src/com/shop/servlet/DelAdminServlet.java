@@ -10,36 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shop.dao.AdminDao;
-import com.shop.domain.Admin;
-import com.shop.utils.DBUtil;
-
-public class AddAdminServlet extends HttpServlet {
+public class DelAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public AddAdminServlet() {
+    public DelAdminServlet() {
         super();
     }
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			request.setCharacterEncoding("UTF-8");
-			String username =  request.getParameter("username");
-			String password = request.getParameter("password");
-			String email = request.getParameter("email");
-			int level = Integer.parseInt(request.getParameter("level"));
 			PrintWriter out = response.getWriter();
-			DBUtil db = new DBUtil();
-			String sql = "insert into admin values(?,?,?,?)";
-			Object[] params = {username,password,email,level};
-			int n = db.doUpdate(sql, params);
-			if(n > 0){
-				out.println("add admin sucess!");
-			}else {
-				out.println("add admin failed!");
+			String username = request.getParameter("username");
+			AdminDao ad = new AdminDao();
+			boolean delsucess = ad.delete(username);
+			if(delsucess == true){
+				out.println("delete admin sucess!");
+			}else{
+				out.println("delete admin failed!");
 			}
 			String stayTime = "3000";
 			String URL = "listAdmin.jsp";
@@ -48,6 +34,9 @@ public class AddAdminServlet extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

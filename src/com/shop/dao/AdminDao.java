@@ -34,8 +34,8 @@ public class AdminDao extends DBUtil{
 	 * @return true：删除成功;false： 删除失败
 	 */
 	public boolean delete(String name) {
-		String sql = "delete admin where name=?";
-		Object[] params = { name};
+		String sql = "delete from admin where username=?";
+		String[] params = { name};
 		try {
 			int n = this.doUpdate(sql, params);
 			if (n > 0) {
@@ -56,8 +56,8 @@ public class AdminDao extends DBUtil{
 	 * @return
 	 */
 	public boolean update(Admin a) {
-		String sql = "update admin set username=?,password=?,email=?,level=?";
-		Object[] params = { a.getUsername(),a.getPassword(),a.getEmail(),a.getLevel() };
+		String sql = "update admin set password=?,email=?,level=? where username=?";
+		Object[] params = { a.getPassword(),a.getEmail(),a.getLevel(),a.getUsername()};
 		try {
 			int n = this.doUpdate(sql, params);
 			if (n > 0) {
@@ -78,15 +78,16 @@ public class AdminDao extends DBUtil{
 	 * @return
 	 */
 	public Admin find(String name) {
-		String sql = "select * from admin where username = "+name;
+		String sql = "select * from admin where username = ?";
+		String[] params = {name};
 		try {
-			this.rs = this.doQuery(sql);
+			this.rs = this.doQuery(sql,params);
 			if (rs.next()) {
 				Admin a = new Admin();
 				a.setUsername(rs.getString(1));
 				a.setPassword(rs.getString(2));
 				a.setEmail(rs.getString(3));
-				a.setLevel(rs.getInt(3));
+				a.setLevel(rs.getInt(4));
 				return a;
 			}
 		} catch (Exception e) {
