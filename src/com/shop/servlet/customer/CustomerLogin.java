@@ -1,6 +1,7 @@
 package com.shop.servlet.customer;
 
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,22 +16,24 @@ public class CustomerLogin extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	public void doGet(HttpServletRequest request,HttpServletResponse response){
 		try{
-		String cust_name=request.getParameter("cust_name").trim();
-		String cust_pwd=request.getParameter("cust_pwd").trim();
+	    PrintWriter out = response.getWriter();
+		String username=request.getParameter("username").trim();
+		String password=request.getParameter("password").trim();
 		
 		CustomerDao cd = new CustomerDao();
 		
-		Customer c = cd.find(cust_name, cust_pwd);
+		Customer c = cd.find(username, password);
 		if(c != null ){
 		  HttpSession session = request.getSession();
 		  session.setAttribute("customer", c);
+		  response.sendRedirect("index.jsp");
 		}else{
 			//用户名密码不匹配
-			System.out.println("用户名密码不匹配！");
+			out.println("<script>alert(用户名密码不匹配！);</script>");
+			 response.sendRedirect("login.jsp");
 		}
+		out.close();
 		
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-		rd.forward(request, response);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

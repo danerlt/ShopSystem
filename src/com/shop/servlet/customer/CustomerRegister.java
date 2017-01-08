@@ -2,13 +2,10 @@ package com.shop.servlet.customer;
 
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.shop.dao.CustomerDao;
-import com.shop.domain.Customer;
 import com.shop.utils.DBUtil;
 
 public class CustomerRegister extends HttpServlet {
@@ -26,15 +23,10 @@ public class CustomerRegister extends HttpServlet {
 			response.setContentType("text/xml;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			DBUtil db = new DBUtil();
-			CustomerDao cd = new CustomerDao();
-			Customer c = new Customer();
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String tel = request.getParameter("tel");
 
-			System.out.println(username);
-			System.out.println(password);
-			System.out.println(tel);
 			
 			String sql = "insert into customer(username,password,tel,sex)values(?,?,?,?)";
 			Object[] params = { username, password, tel, "保密" };
@@ -42,16 +34,11 @@ public class CustomerRegister extends HttpServlet {
 			int n = db.doUpdate(sql, params);
 			System.out.println(n);
 			if (n > 0) {
-				out.print("YES");
-				out.close();
-				System.out.print("YES");
+				response.sendRedirect("login.jsp");
 			} else {
-				out.print("NO");
-				out.close();
-				System.out.println("NO");
+				out.println("<script>alert('注册失败,该用户名已存在。')</script>");
 			}
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");//转发
-		    dispatcher.forward(request, response);
+			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

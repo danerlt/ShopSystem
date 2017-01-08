@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -91,13 +91,11 @@ font {
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<input type="submit" width="100" value="注册" name="submit" "
-									
+								<input type="submit" width="100" value="注册" name="submit"
 									style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
 							</div>
 							<div class="col-sm-offset-2 col-sm-10">
 								<input type="reset" width="100" value="重置" name="submit"
-									
 									style="background: url('./images/register.gif') no-repeat scroll 0 0 rgba(0, 0, 0, 0); height: 35px; width: 100px; color: white;">
 							</div>
 						</div>

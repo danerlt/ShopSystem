@@ -568,10 +568,8 @@ CREATE TABLE shopcart (
 	`isBuy` enum ('ÊÇ', '·ñ') NOT NULL DEFAULT '·ñ',
 	`totalPrice` NUMERIC (7, 2) NULL,
 	PRIMARY KEY (`id`),
-	CONSTRAINT `fk_cid` FOREIGN KEY (`cId`) REFERENCES `customer` (`id`),
-	CONSTRAINT `fk_pid` FOREIGN KEY (`pId`) REFERENCES `product` (`id`),
-	ON UPDATE CASCADE,
-	ON DELETE CASCADE
+	CONSTRAINT `fk_cart_cid` FOREIGN KEY (`cId`) REFERENCES `customer` (`id`),
+	CONSTRAINT `fk_cart_pid` FOREIGN KEY (`pId`) REFERENCES `product` (`id`)
 ) ENGINE = INNODB AUTO_INCREMENT = 1 DEFAULT CHARACTER
 SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 

@@ -22,10 +22,11 @@
 
 	</div>
 	<div class="col-md-4" style="padding-top: 30px;">
-		<a href="cart.jsp">购物车</a>
+		
 		<c:if test="${not empty sessionScope.customer }">
-		  <a href="#">当前用户:${sessionScope.customer.name}</a>
-		  <a href="${pageContext.request.contextPath}/logout">注销</a>
+		  <a href="#">当前用户:${sessionScope.customer.username}</a>
+		  <a href="Logout">注销</a>
+		  <a href="cart.jsp">购物车</a>
 		</c:if>
 		<c:if test="${ empty customer }">
 		    <a href="login.jsp">登录</a> 

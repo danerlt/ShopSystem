@@ -26,7 +26,7 @@
   </filter-mapping>
   <servlet>
     <servlet-name>Login</servlet-name>
-    <servlet-class>com.shop.servlet.CustomerLogin</servlet-class>
+    <servlet-class>com.shop.servlet.customer.CustomerLogin</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -34,11 +34,19 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>Register</servlet-name>
-    <servlet-class>com.shop.servlet.RegisteServlet</servlet-class>
+    <servlet-class>com.shop.servlet.customer.CustomerRegister</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.shop.servlet.customer.CustomerLogout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>AdminLogin</servlet-name>
@@ -112,4 +120,5 @@
     <servlet-name>QueryKind</servlet-name>
     <url-pattern>/admin/QueryKind</url-pattern>
   </servlet-mapping>
+  
 </web-app>

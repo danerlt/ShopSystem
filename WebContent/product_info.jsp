@@ -73,7 +73,9 @@ body {
 
 				<div style="margin:0 auto;width:950px;">
 					<div class="col-md-6">
-						<img style="opacity: 1;width:400px;height:350px;" title=""class="medium"src="${product.pImage}">
+						<a href="product_info.jsp?id=${product.id}"> 
+				           <img src="${product.pImage}" alt="${product.pName}"	width="170" height="170" style="display: inline-block;">
+				        </a>
 					</div>
 
 					<div class="col-md-6">

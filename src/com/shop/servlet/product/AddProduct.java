@@ -2,9 +2,6 @@ package com.shop.servlet.product;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Timestamp;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

@@ -160,13 +160,13 @@ public class CustomerDao extends DBUtil {
 	 * @return 找到用户就返回这个用户，找不到返回null
 	 */
 	public Customer find(String name, String password) {
-		String sql = "select password from customer where username =?";
+		String sql = "select * from customer where username =?";
 		String[] params = { name };
 		try {
 			this.rs = this.doQuery(sql, params);
 
 			if (rs.next()) {
-				String pwd = rs.getString(1);// 获取数据库中的cust_pwd
+				String pwd = rs.getString(3);// 获取数据库中的password
 				if (pwd.equals(password)) {
 					Customer c = new Customer();
 					c.setId(rs.getInt(1));
