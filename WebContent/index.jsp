@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java"
+	import="java.util.*,com.shop.dao.*,com.shop.domain.*,com.shop.utils.*,java.sql.*"
+	contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -36,27 +38,29 @@
 				data-ride="carousel" data-interval="2000">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
-					<li data-target="#carousel-example-generic" data-slide-to="0"
+				<%!	ArrayList<Product> listHotProduct;
+				%>
+				<% 
+			  ProductDao pd = new ProductDao();
+			  listHotProduct = pd.findHot();
+			  session.setAttribute("listHotProduct", listHotProduct);
+			   %>
+			   <li data-target="#carousel-example-generic" data-slide-to="0"
 						class="active"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-					<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+			   <c:forEach var="index" begin="1" end="${fn:length(listHotProduct)-1}" step="1">
+			       <li data-target="#carousel-example-generic" data-slide-to="${index}"></li>
+			   </c:forEach>
 				</ol>
-
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<img src="img/hot/小米.jpg" alt="">
+				    <div class="item active">
+					        <a href="product_info.jsp?id=${sessionScope.listHotProduct[0].id}"><img src="${listHotProduct[0].pImage}" alt="${product.pName}"></a>
 					</div>
-					<div class="item">
-						<img src="img/hot/魅族.jpg" alt="">
-					</div>
-					<div class="item">
-						<img src="img/hot/小米1.jpg" alt="">
-					</div>
-					<div class="item">
-						<img src="img/hot/魅族1.png"">
-					</div>
+				    <c:forEach var="index"  begin="1" end="${fn:length(listHotProduct)-1}" step="1">
+				        <div class="item">
+					        <a href="product_info.jsp?id=${sessionScope.listHotProduct[index].id}"><img src="${sessionScope.listHotProduct[index].pImage}" alt="${product.pName}"></a>
+					    </div>
+			        </c:forEach>
 				</div>
 
 				<!-- Controls -->
@@ -71,97 +75,33 @@
 				</a>
 			</div>
 		</div>
+		<!--创建adDIV-->
+		<div class="">
+			<img src="img/广告.jpg" />
+		</div>
 		<!--创建newProductDIV-->
 		<div>
 			<div class="row">
 				<h3>最新商品</h3>
 			</div>
-			<div style="padding: 0;border: 0; margin: 0;">
-				<div class="col-md-2" style="height: 420px; padding: 0;margin:0">
-					<img src="img/热销.jpg" width="100%" height="100%" />
-				</div>
-				<div class="col-md-10">
-					<div class="col-md-6">
-						<img src="img/new/小米NOT3.jpg" height="210px" width="440px" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/oppor7.png" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/ipad air2.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--创建adDIV-->
-		<div class="">
-			<img src="img/广告.jpg" />
-		</div>
-		<!--创建hotProductDIV-->
-		<div class="">
 			<div class="row">
-				<h3>最热商品</h3>
-			</div>
-			<div style="padding: 0;border: 0; margin: 0;">
-				<div class="col-md-2" style="height: 420px; padding: 0;">
-					<img src="img/热销.jpg" width="100%" height="100%" />
-				</div>
-				<div class="col-md-10">
-					<div class="col-md-6">
-						<img src="img/new/小米NOT3.jpg" height="200px" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/oppor7.png" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/ipad air2.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-					<div class="col-md-2">
-						<img src="img/new/三星s7.jpg" />
-					</div>
-				</div>
-			</div>
+				
+				<%!	ArrayList<Product> listShowProduct;
+				%>
+				<% 
+			  listShowProduct = pd.findShow();
+			  session.setAttribute("listShowProduct", listShowProduct);
+			   %>
+			   <c:forEach var="product" items="${sessionScope.listShowProduct}">
+			       <div class="col-md-2" >
+			           <a href="product_info?id=?${product.id}"><img src="${product.pImage}" alt="${product.pName}" /></a>
+         	       </div>
+			   </c:forEach>
 		</div>
-		<%@ include file="foot.jsp"%>
+	</div>
+		
+	</div>
+	<%@ include file="foot.jsp"%>
 </body>
 
 </html>

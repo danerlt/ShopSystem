@@ -46,13 +46,10 @@
 			    <h2>管理员</h2>
 				<ul>
 					<li>
-					    <a id="product" href="#">商品管理</a>
+					    <a id="product" href="listProduct.jsp" target="mainFrame">商品管理</a>
 					    <ul id="productMenu" class="submenu">
-					    	<li><a href="listProduct.jsp" target="mainFrame">显示所有商品</a></li>
 					    	<li><a href="queryProduct.jsp" target="mainFrame">查询商品</a></li>
 					    	<li><a href="addProduct.jsp" target="mainFrame"> 添加商品</a></li>
-					    	<li><a href="updataProduct.jsp" target="mainFrame">修改商品</a></li>
-					    	<li><a href="deleteProduct.jsp" target="mainFrame">删除商品</a></li>
 					    </ul>
 					</li>
 					<li><a id="kind" href="listKind.jsp" target="mainFrame">分类管理</a>

@@ -1,7 +1,15 @@
-<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ page language="java"
+	import="java.util.*,com.shop.dao.*,com.shop.domain.*"
+	contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% request.setCharacterEncoding("UTF-8"); %>
+<%!ArrayList<Kind> listKind;
+%>
+	<% 
+  KindDao kd = new KindDao();
+  listKind = kd.findAll();
+  session.setAttribute("listKind", listKind);
+%>
 <!--创建logDIV--菜单栏-->
 <div class="container">
 	<!--log-->
@@ -38,17 +46,16 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.jsp">首页</a>
+				<a class="navbar-brand active" href="index.jsp">首页<span class="sr-only">(current)</span></a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">手机数码 <span class="sr-only">(current)</span></a></li>
-					<li><a href="#">电脑办公</a></li>
-					<li><a href="#">图书音频</a></li>
-					<li><a href="#">服装</a></li>
+				    <c:forEach var="kind" items="${sessionScope.listKind}">
+				      <li><a href="#">${kind.kName}</a></li>
+				    </c:forEach>
 				</ul>
 				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">

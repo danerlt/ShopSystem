@@ -6,7 +6,6 @@
 <html>
 
 <head>
-<meta charset="utf-8" />
 <title>商品信息</title>
 <!--根据设备的宽度调整缩放比例   -->
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -15,7 +14,7 @@
 <link rel="stylesheet" href="css/bootstrap-theme.min.css"
 	type="text/css" />
 <!--引入jquery的js文件-->
-<script 　type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- 引入自定义css文件 style.css -->
 <link rel="stylesheet" href="css/style.css" type="text/css" />

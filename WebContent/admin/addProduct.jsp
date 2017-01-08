@@ -1,14 +1,24 @@
-<%@ page language="java" import="java.util.*"
-	contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*,com.shop.dao.*,com.shop.domain.*" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="cmn-Hans-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../css/admin.css" />
+<script src="../js/admin.js"></script>
 </head>
 <body>
+    <%!
+    ArrayList<Kind> listKind;
+    %>
+    <%
+    KindDao kd = new KindDao();
+    listKind = kd.findAll();
+    session.setAttribute("listKind", listKind);
+    %>
 	<h3>添加商品</h3>
-	<form action="AddProductServlet" method="post">
+	<form action="AddProduct" method="post">
 		<table>
 			<tr>
 				<td>商品名称</td>
@@ -37,10 +47,9 @@
 			<tr>
 				<td>商品类别</td>
 				<td><select>
-						<option value="">Volvo</option>
-						<option value="saab">Saab</option>
-						<option value="opel">Opel</option>
-						<option value="audi">Audi</option>
+				        <c:forEach var="kind" items="${sessionScope.listKind}">
+				            <option value="${kind.id}">${kind.kName}</option>
+				        </c:forEach>
 				</select></td>
 			</tr>
 			<tr>

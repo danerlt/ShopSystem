@@ -16,9 +16,17 @@
     <filter-name>CharSetFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <filter>
+    <filter-name>AdminLoginFilter</filter-name>
+    <filter-class>com.shop.filter.AdminLogin</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminLoginFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
   <servlet>
     <servlet-name>Login</servlet-name>
-    <servlet-class>com.shop.servlet.LoginServlet</servlet-class>
+    <servlet-class>com.shop.servlet.CustomerLogin</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -33,43 +41,75 @@
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>AdminLoginServlet</servlet-name>
-    <servlet-class>com.shop.servlet.AdminLogin</servlet-class>
+    <servlet-name>AdminLogin</servlet-name>
+    <servlet-class>com.shop.servlet.admin.AdminLogin</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AdminLoginServlet</servlet-name>
+    <servlet-name>AdminLogin</servlet-name>
     <url-pattern>/admin/AdminLogin</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>AddAdminServlet</servlet-name>
-    <servlet-class>com.shop.servlet.AddAdminServlet</servlet-class>
+    <servlet-name>AddAdmin</servlet-name>
+    <servlet-class>com.shop.servlet.admin.AddAdmin</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddAdminServlet</servlet-name>
+    <servlet-name>AddAdmin</servlet-name>
     <url-pattern>/admin/AddAdmin</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>DelAdminServlet</servlet-name>
-    <servlet-class>com.shop.servlet.DelAdminServlet</servlet-class>
+    <servlet-name>DelAdmin</servlet-name>
+    <servlet-class>com.shop.servlet.admin.DelAdmin</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>DelAdminServlet</servlet-name>
+    <servlet-name>DelAdmin</servlet-name>
     <url-pattern>/admin/DelAdmin</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>EditAdminServlet</servlet-name>
-    <servlet-class>com.shop.servlet.EditAdminServlet</servlet-class>
+    <servlet-name>EditAdmin</servlet-name>
+    <servlet-class>com.shop.servlet.admin.EditAdmin</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EditAdminServlet</servlet-name>
+    <servlet-name>EditAdmin</servlet-name>
     <url-pattern>/admin/EditAdmin</url-pattern>
   </servlet-mapping>
-   <servlet>
-    <servlet-name>QueryAdminServlet</servlet-name>
-    <servlet-class>com.shop.servlet.QueryAdminServlet</servlet-class>
+  <servlet>
+    <servlet-name>QueryAdmin</servlet-name>
+    <servlet-class>com.shop.servlet.admin.QueryAdmin</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>QueryAdminServlet</servlet-name>
+    <servlet-name>QueryAdmin</servlet-name>
     <url-pattern>/admin/QueryAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddKind</servlet-name>
+    <servlet-class>com.shop.servlet.kind.AddKind</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddKind</servlet-name>
+    <url-pattern>/admin/AddKind</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DelKind</servlet-name>
+    <servlet-class>com.shop.servlet.kind.DelKind</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DelKind</servlet-name>
+    <url-pattern>/admin/DelKind</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditKind</servlet-name>
+    <servlet-class>com.shop.servlet.kind.EditKind</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditKind</servlet-name>
+    <url-pattern>/admin/EditKind</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>QueryKind</servlet-name>
+    <servlet-class>com.shop.servlet.kind.QueryKind</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QueryKind</servlet-name>
+    <url-pattern>/admin/QueryKind</url-pattern>
   </servlet-mapping>
 </web-app>

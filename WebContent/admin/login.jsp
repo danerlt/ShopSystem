@@ -15,18 +15,49 @@
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="../css/admin.css" />
+<script src="../js/admin.js"></script>
 </head>
-<body>
-  <div class="container">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-       <form action="AdminLogin" method="post">
-          <label for="">用户名：<input name="name" type="text" /></label><br/>
-          <label for="">密码：<input name="password" type="password" /></label><br/>
-          <input type="submit" value="登录"/>
-       </form>
-    </div>
-    <div class="col-md-4"></div>
+<body><h1>后台登录</h1>
+
+<div class="login" style="margin-top:50px;">
+  
+    
+    <div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">    
+
+            <!--登录-->
+            <div class="web_login" id="web_login">
+               
+               
+               <div class="login-box">
+    
+            
+			<div class="login_form">
+				<form action="AdminLogin" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post"><input type="hidden" name="did" value="0"/>
+               <input type="hidden" name="to" value="log"/>
+                <div class="uinArea" id="uinArea">
+                <label class="input-tips" for="u">帐号：</label>
+                <div class="inputOuter" id="uArea">
+                    
+                    <input type="text" id="u" name="username" class="inputstyle"/>
+                </div>
+                </div>
+                <div class="pwdArea" id="pwdArea">
+               <label class="input-tips" for="p">密码：</label> 
+               <div class="inputOuter" id="pArea">
+                    
+                    <input type="password" id="p" name="password" class="inputstyle"/>
+                </div>
+                </div>
+               
+                <div style="padding-left:50px;margin-top:20px;"><input type="submit" value="登 录" style="width:150px;" class="button_blue"/></div>
+              </form>
+           </div>
+           
+            	</div>
+               
+            </div>
+            <!--登录end-->
   </div>
+</div>
 </body>
 </html>
