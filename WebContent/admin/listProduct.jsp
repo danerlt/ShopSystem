@@ -17,7 +17,6 @@
   ProductDao pd = new ProductDao();
   listProduct = pd.findAll();
   session.setAttribute("listProduct", listProduct);
-  
 %>
 	<div class="details">
 		<div class="details_operation clearfix">

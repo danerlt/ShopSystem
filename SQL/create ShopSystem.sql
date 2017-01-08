@@ -80,7 +80,7 @@ CREATE TABLE `product` (
 	`pName` VARCHAR (64) NULL,
 	`pDesc` text,
 	`pNum` INT NULL,
-	`pubTime` datetime NULL,
+	`pubTime` varchar(32) NULL,
 	`pKeepTime` int NULL,
 	`pImage` VARCHAR (255) NULL,
 	`kId` INT NOT NULL,

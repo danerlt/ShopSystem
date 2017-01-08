@@ -152,5 +152,4 @@
     <servlet-name>QueryProduct</servlet-name>
     <url-pattern>/admin/QueryProduct</url-pattern>
   </servlet-mapping>
-  
 </web-app>

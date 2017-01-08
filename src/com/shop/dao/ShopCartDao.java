@@ -110,7 +110,14 @@ public class ShopCartDao extends DBUtil{
 		try {
 			this.rs = this.doQuery(sql, params);
 			while (rs.next()) {
-				list.add(getShopCart(rs));
+				ShopCart sc = new ShopCart();
+				sc.setId(rs.getInt(1));
+				sc.setcId(rs.getInt(2));
+				sc.setpId(rs.getInt(3));
+				sc.setCount(rs.getInt(4));
+				sc.setIsBuy(rs.getString(5));
+				sc.setTotolPrice(rs.getBigDecimal(6));
+				list.add(sc);
 			}
 			return list;
 		} catch (Exception e) {

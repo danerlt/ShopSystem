@@ -18,7 +18,7 @@
     session.setAttribute("listKind", listKind);
     %>
 	<h3>添加商品</h3>
-	<form action="AddProduct" method="post">
+	<form action="AddProduct" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>商品名称</td>

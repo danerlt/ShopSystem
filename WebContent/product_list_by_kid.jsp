@@ -32,6 +32,7 @@
       session.setAttribute("listProductByKid", listProductByKid);
   }
 %>
+<%@ include file="head.jsp"%>
 <!--创建整体布局DIV-->
 	<div class="container">
 		<!--

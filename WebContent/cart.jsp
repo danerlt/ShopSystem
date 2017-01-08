@@ -1,45 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!doctype html>
+<%@ page language="java"
+	import="java.util.*,com.shop.dao.*,com.shop.domain.*,com.shop.utils.*,java.sql.*"
+	contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>购物车</title>
+<!--根据设备的宽度调整缩放比例   -->
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<!--引入bootstrap的CSS文件 -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-<script src="js/bootstrap.min.js" type="text/javascript"></script>
-<!-- 引入自定义css文件 style.css -->
-<link rel="stylesheet" href="css/style.css" type="text/css" />
-
-<style>
-body {
-	margin-top: 20px;
-	margin: 0 auto;
-}
-
-.carousel-inner .item img {
-	width: 100%;
-	height: 300px;
-}
-
-.container .row div {
-	/* position:relative;
-	 float:left; */
-	
-}
-
-font {
-	color: #666;
-	font-size: 22px;
-	font-weight: normal;
-	padding-right: 17px;
-}
-</style>
+<link rel="stylesheet" href="css/bootstrap-theme.min.css"
+	type="text/css" />
+<!--引入jquery的js文件-->
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
-
 <body>
+	<%!ArrayList<ShopCart> listShopCart;
+%>
+	<% 
+	int cId = 0;
+	Customer customer = (Customer)session.getAttribute("customer");
+	if(customer != null){
+	    cId = customer.getId();
+	}
+	ShopCartDao scd = new ShopCartDao();
+    listShopCart = scd.findAll(cId);
+    session.setAttribute("listShopCart", listShopCart);
+%>
 	<!-- 头部DIV -->
 	<%@include file="head.jsp"%>
 	<!-- 主体DIV  -->
@@ -57,24 +48,43 @@ font {
 							<th>小计</th>
 							<th>操作</th>
 						</tr>
-						<tr class="active">
-							<td width="60" width="40%"><input type="hidden" name="id"
-								value="22"> 
-								<a href="product_info.jsp?id=${product.id}"> 
-				           <img src="${product.pImage}" alt="${product.pName}"	width="170" height="170" style="display: inline-block;">
-				        </a>
-								<img src="./image/dadonggua.jpg" width="70"
-								height="60"></td>
-							<td width="30%"><a target="_blank"> 有机蔬菜 大冬瓜...</a></td>
-							<td width="20%">￥298.00</td>
-							<td width="10%"><input type="text" name="quantity" value="1"
-								maxlength="4" size="10"></td>
-							<td width="15%"><span class="subtotal">￥596.00</span></td>
-							<td><a href="javascript:;" class="delete">删除</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+						<c:forEach var="shopcart" items="${sessionScope.listShopCart}">
+							<c:set var="pid" value="${shopcart.pId}" />
+							<%
+							try{
+							String param = session.getAttribute("pid").toString();
+							int pId = 0;
+							if(param != null){
+								pId = Integer.parseInt(param);
+							}
+							ProductDao pd = new ProductDao();
+							Product p = new Product();
+							p = pd.find(pId);
+							session.setAttribute("product", p);
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+							%>
+							<tr class="active">
+								<td width="60" width="40%"><input type="hidden" name="id" value="22"> 
+								  <a href="product_info.jsp?id=${sessionScope.product.id}">
+								    <img src="${sessionScope.product.pImage}"
+										alt="${sessionScope.product.pName}" width="auto" height="85px"
+										style="display: inline-block;">
+								  </a> 
+								<td width="30%">
+								  <a target="_blank" href="product_info.jsp?id=${sessionScope.product.id}">${sessionScope.product.pName}</a>
+								</td>
+								<td width="20%">${sessionScope.product.iPrice}元</td>
+								<td width="10%"><input type="text" name="count" value="1"
+									maxlength="4" size="10"></td>
+								<td width="15%"><span class="subtotal">￥${shopcart.totolPrice}元</span></td>
+								<td><a href="DelShopCart?id=${shopcart.id}" class="delete">删除</a></td>
+							</tr>
+                 			</c:forEach>
+						</tbody>
+					</table>
+				</div>
 		</div>
 	</div>
 	<%@include file="foot.jsp"%>
