@@ -18,15 +18,16 @@ public class AdminLogin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
-			String name = request.getParameter("name").trim();
+			String username = request.getParameter("username").trim();
 			String password = request.getParameter("password").trim();
 			AdminDao ad = new AdminDao();
-			Admin admin = ad.find(name, password);
+			Admin admin = ad.find(username, password);
 			if( admin != null) {
 				//查找到用户
 				request.getSession().setAttribute("admin", admin);
-				RequestDispatcher rd = request.getRequestDispatcher("/admin/index.jsp");
-				rd.forward(request, response);
+				response.sendRedirect("/admin/index.jsp");
+//				RequestDispatcher rd = request.getRequestDispatcher("/admin/index.jsp");
+//				rd.forward(request, response);
 			}else {
 				System.out.println("登录失败！");
 			}

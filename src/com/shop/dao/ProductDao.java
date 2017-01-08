@@ -31,11 +31,11 @@ public class ProductDao extends DBUtil {
 	/**
 	 * 按照ID删除商品
 	 * 
-	 * @param id 用户ID
+	 * @param id 商品ID
 	 * @return
 	 */
 	public boolean delete(int id) {
-		String sql = "delete product where id="+id;
+		String sql = "delete from product where id="+id;
 		try {
 			int n = this.doUpdate(sql);
 			if (n > 0) {
@@ -49,13 +49,13 @@ public class ProductDao extends DBUtil {
 		return false;
 	}
 	/**
-	 * 按照ID删除用户
+	 * 按照ID删除商品
 	 * 
-	 * @param name 用户名
+	 * @param pname 商品名
 	 * @return
 	 */
 	public boolean delete(String pname) {
-		String sql = "delete product where pName="+pname;
+		String sql = "delete from product where pName="+pname;
 		try {
 			int n = this.doUpdate(sql);
 			if (n > 0) {
@@ -69,160 +69,247 @@ public class ProductDao extends DBUtil {
 		return false;
 	}
 
-//	/**
-//	 * 修改用户
-//	 * 
-//	 * @param p
-//	 * @return
-//	 */
-//	public boolean update(Product p) {
-//		String sql = "update product set username=?,password=?,email=?,tel=?,sex=?,level=?,score=? where id=?";
-//		Object[] params = { p.getUsername(),p.getPassword(),p.getEmail(),p.getTel(),p.getSex(),p.getLevel(),p.getScore(),p.getId()};
-//		try {
-//			int n = this.doUpdate(sql, params);
-//			if (n > 0) {
-//				return true;
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			this.close();
-//		}
-//		return false;
-//	}
-//
-//	/**
-//	 * 按照Name查找用户
-//	 * 
-//	 * @param id 用户ID 
-//	 * @return
-//	 */
-//	public Product find(int id) {
-//		String sql = "select * from product where id = "+id;
-//		try {
-//			this.rs = this.doQuery(sql);
-//			if (rs.next()) {
-//				Product p = new Product();
-//				p.setId(rs.getInt(1));
-//				p.setUsername(rs.getString(2));
-//				p.setPassword(rs.getString(3));
-//				p.setEmail(rs.getString(4));
-//				p.setTel(rs.getString(5));
-//				p.setSex(rs.getString(6));
-//				p.setLevel(rs.getInt(7));
-//				p.setScore(rs.getInt(8));
-//				return c;
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			this.close();
-//		}
-//		return null;
-//	}
-//
-//	/**
-//	 * 按照Name查找用户
-//	 * 
-//	 * @param name 用户名
-//	 * @return
-//	 */
-//	public Product find(String name) {
-//		String sql = "select * from product where username =?";
-//		String[] params={name} ;
-//		try {
-//			this.rs = this.doQuery(sql,params);
-//			if (rs.next()) {
-//				Product p = new Product();
-//				p.setId(rs.getInt(1));
-//				p.setUsername(rs.getString(2));
-//				p.setPassword(rs.getString(3));
-//				p.setEmail(rs.getString(4));
-//				p.setTel(rs.getString(5));
-//				p.setSex(rs.getString(6));
-//				p.setLevel(rs.getInt(7));
-//				p.setScore(rs.getInt(8));
-//				return c;
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			this.close();
-//		}
-//		return null;
-//	}
-//	/**
-//	 * 按照name和password查找用户
-//	 * 
-//	 * @param name 用户名
-//	 * @param password 密码
-//	 * @return 找到用户就返回这个用户，找不到返回null
-//	 */
-//	public Product find(String name, String password) {
-//		String sql = "select password from product where username =?";
-//		String[] params = { name };
-//		try {
-//			this.rs = this.doQuery(sql, params);
-//
-//			if (rs.next()) {
-//				String pwd = rs.getString(1);// 获取数据库中的cust_pwd
-//				if (pwd.equals(password)) {
-//					Product p = new Product();
-//					p.setId(rs.getInt(1));
-//					p.setUsername(rs.getString(2));
-//					p.setPassword(rs.getString(3));
-//					p.setEmail(rs.getString(4));
-//					p.setTel(rs.getString(5));
-//					p.setSex(rs.getString(6));
-//					p.setLevel(rs.getInt(7));
-//					p.setScore(rs.getInt(8));
-//					return c;
-//				}
-//			} else {
-//				return null;
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			this.close();
-//		}
-//		return null;
-//	}
-//
-//	/**
-//	 * 查找所有用户
-//	 * 
-//	 * @return
-//	 */
-//	public ArrayList<Product> findAll() {
-//		String sql = "select * from product ";
-//		ArrayList<Product> list = new ArrayList<Product>();
-//		String[] params = null;
-//		try {
-//			this.rs = this.doQuery(sql, params);
-//			while (rs.next()) {
-//				Product p = new Product();
-//				p.setId(rs.getInt(1));
-//				p.setUsername(rs.getString(2));
-//				p.setPassword(rs.getString(3));
-//				p.setEmail(rs.getString(4));
-//				p.setTel(rs.getString(5));
-//				p.setSex(rs.getString(6));
-//				p.setLevel(rs.getInt(7));
-//				p.setScore(rs.getInt(8));
-//				list.add(c);
-//			}
-//			return list;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			this.close();
-//		}
-//		return null;
-//	}
-//
-//	public static void main(String[] args) {
-//	}
-//
+	/**
+	 * 修改商品
+	 * 
+	 * @param p
+	 * @return
+	 */
+	public boolean update(Product p) {
+		String sql = "update product set pName=?,pDesc=?,pNum=?,pubTime=?,pKeepTime=?,pImage=?,kId=?,iPrice=?,mPrice=?,isHot=?,isShow=? where id=?";
+		Object[] params = { 
+				p.getpName(),
+				p.getpDesc(),
+				p.getpNum(),
+				p.getPubTime(),
+				p.getpKeepTime(),
+				p.getpImage(),
+				p.getkId(),
+				p.getiPrice(),
+				p.getmPrice(),
+				p.getIsHot(),
+				p.getIsShow(),
+				p.getId()
+				};
+		try {
+			int n = this.doUpdate(sql, params);
+			if (n > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return false;
+	}
+
+	/**
+	 * 按照Name查找商品
+	 * 
+	 * @param id 商品ID 
+	 * @return
+	 */
+	public Product find(int id) {
+		String sql = "select * from product where id = "+id;
+		try {
+			this.rs = this.doQuery(sql);
+			if (rs.next()) {
+				Product p = new Product();
+				p.setId(rs.getInt(1));
+				p.setpName(rs.getString(2));
+				p.setpDesc(rs.getString(3));
+				p.setpNum(rs.getInt(4));
+				p.setPubTime(rs.getTimestamp(5));
+				p.setpKeepTime(rs.getInt(6));
+				p.setpImage(rs.getString(7));
+				p.setkId(rs.getInt(8));
+				p.setiPrice(rs.getBigDecimal(9));
+				p.setmPrice(rs.getBigDecimal(10));
+				p.setIsHot(rs.getString(11));
+				p.setIsShow(rs.getString(12));
+				return p;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return null;
+	}
+
+	/**
+	 * 按照Name查找商品
+	 * 
+	 * @param name 商品名
+	 * @return
+	 */
+	public Product find(String pname) {
+		String sql = "select * from product where pName =?";
+		String[] params={pname} ;
+		try {
+			this.rs = this.doQuery(sql,params);
+			if (rs.next()) {
+				Product p = new Product();
+				p.setId(rs.getInt(1));
+				p.setpName(rs.getString(2));
+				p.setpDesc(rs.getString(3));
+				p.setpNum(rs.getInt(4));
+				p.setPubTime(rs.getTimestamp(5));
+				p.setpKeepTime(rs.getInt(6));
+				p.setpImage(rs.getString(7));
+				p.setkId(rs.getInt(8));
+				p.setiPrice(rs.getBigDecimal(9));
+				p.setmPrice(rs.getBigDecimal(10));
+				p.setIsHot(rs.getString(11));
+				p.setIsShow(rs.getString(12));
+				return p;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return null;
+	}
+	/**
+	 * 查找所有商品
+	 * 
+	 * @return
+	 */
+	public ArrayList<Product> findAll() {
+		String sql = "select * from product order by id";
+		ArrayList<Product> list = new ArrayList<Product>();
+		String[] params = null;
+		try {
+			this.rs = this.doQuery(sql, params);
+			while (rs.next()) {
+				Product p = new Product();
+				p.setId(rs.getInt(1));
+				p.setpName(rs.getString(2));
+				p.setpDesc(rs.getString(3));
+				p.setpNum(rs.getInt(4));
+				p.setPubTime(rs.getTimestamp(5));
+				p.setpKeepTime(rs.getInt(6));
+				p.setpImage(rs.getString(7));
+				p.setkId(rs.getInt(8));
+				p.setiPrice(rs.getBigDecimal(9));
+				p.setmPrice(rs.getBigDecimal(10));
+				p.setIsHot(rs.getString(11));
+				p.setIsShow(rs.getString(12));
+				list.add(p);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return null;
+	}
+	/**
+	 * 查找所有热销商品
+	 * 
+	 * @return
+	 */
+	public ArrayList<Product> findHot() {
+		String sql = "select * from product where isHot = ? order by id";
+		ArrayList<Product> list = new ArrayList<Product>();
+		String[] params = {"是"};
+		try {
+			this.rs = this.doQuery(sql, params);
+			while (rs.next()) {
+				Product p = new Product();
+				p.setId(rs.getInt(1));
+				p.setpName(rs.getString(2));
+				p.setpDesc(rs.getString(3));
+				p.setpNum(rs.getInt(4));
+				p.setPubTime(rs.getTimestamp(5));
+				p.setpKeepTime(rs.getInt(6));
+				p.setpImage(rs.getString(7));
+				p.setkId(rs.getInt(8));
+				p.setiPrice(rs.getBigDecimal(9));
+				p.setmPrice(rs.getBigDecimal(10));
+				p.setIsHot(rs.getString(11));
+				p.setIsShow(rs.getString(12));
+				list.add(p);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return null;
+	}
+	/**
+	 * 查找所有首页显示商品
+	 * 
+	 * @return
+	 */
+	public ArrayList<Product> findShow() {
+		String sql = "select * from product where isShow = ? order by id";
+		ArrayList<Product> list = new ArrayList<Product>();
+		String[] params = {"是"};
+		try {
+			this.rs = this.doQuery(sql, params);
+			while (rs.next()) {
+				Product p = new Product();
+				p.setId(rs.getInt(1));
+				p.setpName(rs.getString(2));
+				p.setpDesc(rs.getString(3));
+				p.setpNum(rs.getInt(4));
+				p.setPubTime(rs.getTimestamp(5));
+				p.setpKeepTime(rs.getInt(6));
+				p.setpImage(rs.getString(7));
+				p.setkId(rs.getInt(8));
+				p.setiPrice(rs.getBigDecimal(9));
+				p.setmPrice(rs.getBigDecimal(10));
+				p.setIsHot(rs.getString(11));
+				p.setIsShow(rs.getString(12));
+				list.add(p);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return null;
+	}
+	/**
+	 * 查找所有首页显示商品
+	 * 
+	 * @return
+	 */
+	public ArrayList<Product> findByKid(int kid) {
+		String sql = "select * from product where kId = ? order by id";
+		ArrayList<Product> list = new ArrayList<Product>();
+		Object[] params = {kid};
+		try {
+			this.rs = this.doQuery(sql, params);
+			while (rs.next()) {
+				Product p = new Product();
+				p.setId(rs.getInt(1));
+				p.setpName(rs.getString(2));
+				p.setpDesc(rs.getString(3));
+				p.setpNum(rs.getInt(4));
+				p.setPubTime(rs.getTimestamp(5));
+				p.setpKeepTime(rs.getInt(6));
+				p.setpImage(rs.getString(7));
+				p.setkId(rs.getInt(8));
+				p.setiPrice(rs.getBigDecimal(9));
+				p.setmPrice(rs.getBigDecimal(10));
+				p.setIsHot(rs.getString(11));
+				p.setIsShow(rs.getString(12));
+				list.add(p);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.close();
+		}
+		return null;
+	}
 }

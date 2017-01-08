@@ -1,16 +1,17 @@
 package com.shop.domain;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 public class Product {
     private int id;
     private String pName;
     private String pDesc;
     private int pNum;
-    private java.util.Date pubTime;
+    private java.sql.Timestamp pubTime;
     private int pKeepTime;
     private String pImage;
-    private String kId;
+    private int kId;
     private BigDecimal iPrice;
     private BigDecimal mPrice;
     private String isHot;
@@ -39,10 +40,10 @@ public class Product {
 	public void setpDesc(String pDesc) {
 		this.pDesc = pDesc;
 	}
-	public java.util.Date getPubTime() {
+	public Timestamp getPubTime() {
 		return pubTime;
 	}
-	public void setPubTime(java.util.Date pubTime) {
+	public void setPubTime(Timestamp pubTime) {
 		this.pubTime = pubTime;
 	}
 	public int getpKeepTime() {
@@ -57,10 +58,10 @@ public class Product {
 	public void setpImage(String pImage) {
 		this.pImage = pImage;
 	}
-	public String getkId() {
+	public int getkId() {
 		return kId;
 	}
-	public void setkId(String kId) {
+	public void setkId(int kId) {
 		this.kId = kId;
 	}
 	public BigDecimal getiPrice() {

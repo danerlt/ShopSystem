@@ -35,7 +35,7 @@
 				   });
 				</script>
 			<div id="carousel-example-generic" class="carousel slide"
-				data-ride="carousel" data-interval="2000">
+				data-ride="carousel" data-interval="2000" style="height:450px">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
 				<%!	ArrayList<Product> listHotProduct;
@@ -84,22 +84,9 @@
 			<div class="row">
 				<h3>最新商品</h3>
 			</div>
-			<div class="row">
-				
-				<%!	ArrayList<Product> listShowProduct;
-				%>
-				<% 
-			  listShowProduct = pd.findShow();
-			  session.setAttribute("listShowProduct", listShowProduct);
-			   %>
-			   <c:forEach var="product" items="${sessionScope.listShowProduct}">
-			       <div class="col-md-2" >
-			           <a href="product_info?id=?${product.id}"><img src="${product.pImage}" alt="${product.pName}" /></a>
-         	       </div>
-			   </c:forEach>
+		    <jsp:include page="product_list.jsp"></jsp:include>
+			
 		</div>
-	</div>
-		
 	</div>
 	<%@ include file="foot.jsp"%>
 </body>

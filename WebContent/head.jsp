@@ -54,7 +54,7 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 				    <c:forEach var="kind" items="${sessionScope.listKind}">
-				      <li><a href="#">${kind.kName}</a></li>
+				      <li><a href="product_list_by_kid.jsp?kid=${kind.id}">${kind.kName}</a></li>
 				    </c:forEach>
 				</ul>
 				<form class="navbar-form navbar-right" role="search">

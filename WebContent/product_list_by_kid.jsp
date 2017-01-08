@@ -19,30 +19,20 @@
 <script  src="js/bootstrap.min.js"></script>
 <!-- 引入自定义css文件 style.css -->
 <link rel="stylesheet" href="css/style.css"  />
-
-<style>
-body {
-	margin-top: 20px;
-	margin: 0 auto;
-}
-
-.carousel-inner .item img {
-	width: 100%;
-	height: 300px;
-}
-</style>
 </head>
-
 <body>
-				
-				<%!	ArrayList<Product> listShowProduct;
-				%>
-				<% 
-			  ProductDao pd = new ProductDao();	
-			  listShowProduct = pd.findShow();
-			  session.setAttribute("listShowProduct", listShowProduct);
-			   %>
-	<!--创建整体布局DIV-->
+<%!	ArrayList<Product> listProductByKid;
+%>
+<% 
+  String param = request.getParameter("kid");
+  if(param != null){
+      int kid = Integer.parseInt(param);
+      ProductDao pd = new ProductDao();	
+      listProductByKid = pd.findByKid(kid);
+      session.setAttribute("listProductByKid", listProductByKid);
+  }
+%>
+<!--创建整体布局DIV-->
 	<div class="container">
 		<!--
             	作者：lt1598552894@outlook.com
@@ -50,7 +40,7 @@ body {
             	描述：物品销售DIV
             -->
 		<div class="row" style="width:1210px;margin:0 auto;">
-            <c:forEach var="product" items="${sessionScope.listShowProduct}">
+            <c:forEach var="product" items="${sessionScope.listProductByKid}">
 			<div class="col-md-2">
 				<a href="product_info.jsp?id=${product.id}"> 
 				    <img src="${product.pImage}" alt="${product.pName}"	width="170" height="170" style="display: inline-block;">
@@ -109,5 +99,4 @@ body {
 		</div>
 	</div>
 </body>
-
 </html>

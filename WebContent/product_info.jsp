@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 <!DOCTYPE html>
 <html>
 
 <head>
+<meta charset="utf-8" />
 <title>商品信息</title>
 <!--根据设备的宽度调整缩放比例   -->
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -41,33 +40,54 @@ body {
             	时间：2016-06-14
             	描述：物品销售DIV
             -->
+        <%
+           try{
+        	   int id = Integer.parseInt(request.getParameter("id"));
+        	   ProductDao pd = new ProductDao();
+        	   Product product = pd.find(id);
+        	   if(product != null){
+        		   request.setAttribute("product", product);
+        	   }
+           }catch(Exception e){
+        	   e.printStackTrace();
+           }
+        %>
 		<div class="container">
 			<div class="row">
+			  <c:if test="${not empty requestScope.product}">
 				<div
 					style="border: 1px solid #e4e4e4;width:930px;margin-bottom:10px;margin:0 auto;padding:10px;margin-bottom:10px;">
-					<a href="./index.jsp">首页&nbsp;&nbsp;&gt;</a> <a href="./蔬菜分类.jsp">蔬菜&nbsp;&nbsp;&gt;</a>
-					<a>无公害蔬菜</a>
+					<a href="./index.jsp">首页&nbsp;&nbsp;&gt;</a>
+					 <a href="./proucd_list_by_kid.jsp?kid=${product.kId}"><c:set var="kId" value="${product.kId}" scope="request">
+					     </c:set>
+					       <%
+					         String kId = request.getAttribute("kId").toString();
+					         Kind k = kd.find(Integer.parseInt(kId));
+					         request.setAttribute("kName", k.getkName());
+					       %>
+					     <c:if test="${not empty requestScope.kName}">
+					        ${requestScope.kName}
+					     </c:if>&nbsp;&nbsp;&gt;</a>
+					<a>${product.pName}</a>
 				</div>
 
 				<div style="margin:0 auto;width:950px;">
 					<div class="col-md-6">
-						<img style="opacity: 1;width:400px;height:350px;" title=""
-							class="medium"
-							src="image/r___________renleipic_01/bigPic5f3622b8-028a-4e62-a77f-f41a16d715ed.jpg">
+						<img style="opacity: 1;width:400px;height:350px;" title=""class="medium"src="${product.pImage}">
 					</div>
 
 					<div class="col-md-6">
 						<div>
-							<strong>大冬瓜</strong>
+							<strong>${product.pName}</strong>
 						</div>
 						<div
 							style="border-bottom: 1px dotted #dddddd;width:350px;margin:10px 0 10px 0;">
-							<div>编号：751</div>
+							<div>编号：${product.kId}</div>
 						</div>
 
 						<div style="margin:10px 0 10px 0;">
-							会员价: <strong style="color:#ef0101;">￥：4.78元/份</strong> 参 考 价：
-							<del>￥6.00元/份</del>
+							会员价: <strong style="color:#ef0101;">￥：${product.iPrice}</strong> 市场价：
+							<del>￥:${product.mPrice}</del>
 						</div>
 
 						<div style="margin:10px 0 10px 0;">
@@ -100,10 +120,11 @@ body {
 						style="background-color:#d3d3d3;width:930px;padding:10px 10px;margin:10px 0 10px 0;">
 						<strong>商品介绍</strong>
 					</div>
-
+                    <div>
+                      <storng>${product.pDesc}</storng>
+                    </div>
 					<div>
-						<img
-							src="image/r___________renleipic_01/bigPic139f030b-d68b-41dd-be6d-b94cc568d3c5.jpg">
+						<img src="${product.pImage}">
 					</div>
 
 					<div
@@ -117,16 +138,12 @@ body {
 									<th colspan="2">基本参数</th>
 								</tr>
 								<tr>
-									<th width="10%">级别</th>
-									<td width="30%">标准</td>
+									<th width="10%">生产日期</th>
+									<td width="30%">${product.pubTime}</td>
 								</tr>
 								<tr>
-									<th width="10%">标重</th>
-									<td>500</td>
-								</tr>
-								<tr>
-									<th width="10%">浮动</th>
-									<td>200</td>
+									<th width="10%">保质期</th>
+									<td>${product.pKeepTime}&nbsp;天</td>
 								</tr>
 							</tbody>
 						</table>
@@ -158,7 +175,10 @@ body {
 						</table>
 					</div>
 				</div>
-
+              </c:if>
+              <c:if test="${empty requestScope.product}">
+                 <p>没有该商品！</p>
+              </c:if>
 			</div>
 		</div>
 		<%@ include file="foot.jsp" %>
