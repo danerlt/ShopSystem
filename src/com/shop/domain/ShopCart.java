@@ -1,55 +1,47 @@
 package com.shop.domain;
 
 public class ShopCart {
-	private String shopCartID;
-	private String customerID;
-	private String productID;
-	private double unitPrice;
-	private int qty;
-	private String buy;
-	private double proTaoAmt;
-	
-	public String getShopCartID() {
-		return shopCartID;
+	private String id;
+	private String cId;
+	private String pId;
+	private int count;
+	private String isBuy;
+	private double totolPrice;
+	public String getId() {
+		return id;
 	}
-	public void setShopCartID(String shopCartID) {
-		this.shopCartID = shopCartID;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getCustomerID() {
-		return customerID;
+	public String getcId() {
+		return cId;
 	}
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
+	public void setcId(String cId) {
+		this.cId = cId;
 	}
-	public String getProductID() {
-		return productID;
+	public String getpId() {
+		return pId;
 	}
-	public void setProductID(String productID) {
-		this.productID = productID;
+	public void setpId(String pId) {
+		this.pId = pId;
 	}
-	public double getUnitPrice() {
-		return unitPrice;
+	public int getCount() {
+		return count;
 	}
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setCount(int count) {
+		this.count = count;
 	}
-	public int getQty() {
-		return qty;
+	public String getIsBuy() {
+		return isBuy;
 	}
-	public void setQty(int qty) {
-		this.qty = qty;
+	public void setIsBuy(String isBuy) {
+		this.isBuy = isBuy;
 	}
-	public String getBuy() {
-		return buy;
+	public double getTotolPrice() {
+		return totolPrice;
 	}
-	public void setBuy(String buy) {
-		this.buy = buy;
-	}
-	public double getProTaoAmt() {
-		return proTaoAmt;
-	}
-	public void setProTaoAmt(double proTaoAmt) {
-		this.proTaoAmt = proTaoAmt;
+	public void setTotolPrice(double totolPrice) {
+		this.totolPrice = totolPrice;
 	}
 
 }

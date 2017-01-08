@@ -9,7 +9,8 @@ body {
 	font-family:"Microsoft Yahei";
 	font-size:12px;
 	margin:0;
-background: #fff url(../images/1.jpg) 50% 0 no-repeat;}
+background: #fff url(../images/1.jpg) 50% 0 no-repeat; 
+background-attachment:fixed;}
 ul {
 	padding:0;
 	margin:0;

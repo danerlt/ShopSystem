@@ -23,7 +23,7 @@
 		<div class="details_operation clearfix">
 			<div class="bui_select">
 				<input type="button" value="添&nbsp;&nbsp;加" class="add"
-					onclick="addKind()">
+					onclick="addProduct()">
 			</div>
 
 		</div>
@@ -76,9 +76,9 @@
 					  <td width="5%">${product.isHot}</td>
 					  <td width="5%">${product.isShow}</td>
 					<td align="center"><input id="edit" type="button" value="修改"
-							class="btn" onclick="editKind('${product.id}')"> <input
+							class="btn" onclick="editProduct('${product.id}')"> <input
 							id="del" type="button" value="删除" class="btn"
-							onclick="delKind('${product.id}')">
+							onclick="delProduct('${product.id}')">
 					</td>
 					</tr>
 				</c:forEach>

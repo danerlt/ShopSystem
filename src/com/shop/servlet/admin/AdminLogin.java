@@ -24,9 +24,8 @@ public class AdminLogin extends HttpServlet {
 			if( admin != null) {
 				//查找到用户
 				request.getSession().setAttribute("admin", admin);
-				response.sendRedirect("/admin/index.jsp");
-//				RequestDispatcher rd = request.getRequestDispatcher("/admin/index.jsp");
-//				rd.forward(request, response);
+				response.sendRedirect("/ShopSystem/admin/index.jsp");
+				return;
 			}else {
 				System.out.println("登录失败！");
 			}

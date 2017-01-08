@@ -123,7 +123,7 @@ body {
 						<strong>商品介绍</strong>
 					</div>
                     <div>
-                      <storng>${product.pDesc}</storng>
+                      <strong>${product.pDesc}</strong>
                     </div>
 					<div>
 						<img src="${product.pImage}">

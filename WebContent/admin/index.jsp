@@ -70,7 +70,7 @@
 			</div>
 			<div class="col-md-10">
 			    <h2>后台管理</h2>
-			    <iframe name="mainFrame" width="100%" height="600px" frameborder="none">
+			    <iframe name="mainFrame" width="100%" height="600px" frameborder="0">
 			    
 			    </iframe>
  			</div>

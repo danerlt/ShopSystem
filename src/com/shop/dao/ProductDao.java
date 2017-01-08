@@ -1,5 +1,6 @@
 package com.shop.dao;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import com.shop.domain.Product;
 import com.shop.utils.DBUtil;
@@ -289,19 +290,7 @@ public class ProductDao extends DBUtil {
 		try {
 			this.rs = this.doQuery(sql, params);
 			while (rs.next()) {
-				Product p = new Product();
-				p.setId(rs.getInt(1));
-				p.setpName(rs.getString(2));
-				p.setpDesc(rs.getString(3));
-				p.setpNum(rs.getInt(4));
-				p.setPubTime(rs.getTimestamp(5));
-				p.setpKeepTime(rs.getInt(6));
-				p.setpImage(rs.getString(7));
-				p.setkId(rs.getInt(8));
-				p.setiPrice(rs.getBigDecimal(9));
-				p.setmPrice(rs.getBigDecimal(10));
-				p.setIsHot(rs.getString(11));
-				p.setIsShow(rs.getString(12));
+				Product p = getProduct(rs);
 				list.add(p);
 			}
 			return list;
@@ -309,6 +298,31 @@ public class ProductDao extends DBUtil {
 			e.printStackTrace();
 		} finally {
 			this.close();
+		}
+		return null;
+	}
+	public Product getProduct(ResultSet rs){
+		try{
+		if(rs != null){
+			Product p = new Product();
+			p.setId(rs.getInt(1));
+			p.setpName(rs.getString(2));
+			p.setpDesc(rs.getString(3));
+			p.setpNum(rs.getInt(4));
+			p.setPubTime(rs.getTimestamp(5));
+			p.setpKeepTime(rs.getInt(6));
+			p.setpImage(rs.getString(7));
+			p.setkId(rs.getInt(8));
+			p.setiPrice(rs.getBigDecimal(9));
+			p.setmPrice(rs.getBigDecimal(10));
+			p.setIsHot(rs.getString(11));
+			p.setIsShow(rs.getString(12));
+			return p;
+		}else {
+		    return null;
+		}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return null;
 	}

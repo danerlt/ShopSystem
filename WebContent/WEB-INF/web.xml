@@ -120,5 +120,37 @@
     <servlet-name>QueryKind</servlet-name>
     <url-pattern>/admin/QueryKind</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AddProduct</servlet-name>
+    <servlet-class>com.shop.servlet.product.AddProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddProduct</servlet-name>
+    <url-pattern>/admin/AddProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DelProduct</servlet-name>
+    <servlet-class>com.shop.servlet.product.DelProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DelProduct</servlet-name>
+    <url-pattern>/admin/DelProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>EditProduct</servlet-name>
+    <servlet-class>com.shop.servlet.product.EditProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditProduct</servlet-name>
+    <url-pattern>/admin/EditProduct</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>QueryProduct</servlet-name>
+    <servlet-class>com.shop.servlet.product.QueryProduct</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QueryProduct</servlet-name>
+    <url-pattern>/admin/QueryProduct</url-pattern>
+  </servlet-mapping>
   
 </web-app>
