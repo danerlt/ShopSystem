@@ -6,6 +6,6 @@
 <title>not found</title>
 </head>
 <body>
-
+  <p>服务器内部错误</p>
 </body>
 </html>
