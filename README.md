@@ -47,6 +47,7 @@ admin文件夹下放的是后台管理的页面，css存放样式表，err下存
 ![image_1b5v13qbo14ljenp15aq1m741ubr8o.png-122.4kB][11]
 *  order_info.jsp 订单详情信息
 ![image_1b5v152941on1io51m4g1i7gu929l.png-85.1kB][12]
+
 #### 后台
 后台登陆必须手动在地址栏输入[http://localhost:9090/ShopSystem/admin/login.jsp](http://localhost:9090/ShopSystem/admin/login.jsp),默认帐号为root,密码为root.
 * index.jsp 主页
@@ -116,7 +117,7 @@ var url = "Register?username="+username;
 2.mysql数据库中保存图片
 mysql并不保存图片源文件，而是保持图片路径。
 3.dbutils
-将连接数据库,查询，更新数据库封装到DBUtil中，传入sql和Object数据对数据库进行更新。mysql 用户名为root,密码为myroot!!!,数据库名为shopsystem
+将连接数据库,查询，更新数据库封装到DBUtil中，传入sql和Object数据对数据库进行更新。mysql 用户名为root,密码为自己设置的,数据库名为shopsystem
 ```
 package com.shop.utils;
 
@@ -141,9 +142,8 @@ public class DBUtil {
 		driver = "com.mysql.jdbc.Driver";
 		url = "jdbc:mysql://127.0.0.1:3306/shopsystem?useUnicode=true&characterEncoding=utf-8";
 	    username = "root";
-		password = "myroot!!!";
-
-	}
+		password = "";//改为自己设置的密码	
+		}
 
 	public DBUtil() {
 	}
