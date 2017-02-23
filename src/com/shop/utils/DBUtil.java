@@ -33,8 +33,7 @@ public class DBUtil {
 		driver = "com.mysql.jdbc.Driver";
 		url = "jdbc:mysql://127.0.0.1:3306/shopsystem?useUnicode=true&characterEncoding=utf-8";
 	    username = "root";
-		password = "myroot!!!";
-
+		password = "";//改为自己设置的密码
 	}
 
 	public DBUtil() {
