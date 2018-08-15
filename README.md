@@ -1,6 +1,9 @@
 ﻿# ShopSystem
 小型电子商城网站
 
+## 本项目已废弃
+更新于2018-08-15
+
 ## 需求分析
 根据需求，本系统本次主要完成以下功能
 1.用户功能区 
@@ -348,6 +351,7 @@ AND table_schema = DATABASE()
 ORDER BY
     constraint_name;
 ```
+
 
   [1]: http://static.zybuluo.com/danerlt/jamscme18voozvkufbke0s89/image_1b5uv0lfjuoe37b1s6k1f8i1cjac.png
   [2]: http://static.zybuluo.com/danerlt/x9triytszm2e5l6sken5vb77/image_1b5uvcscr11ucvq6fuui3717i1p.png
